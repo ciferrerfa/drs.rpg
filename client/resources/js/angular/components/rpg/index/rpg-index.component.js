@@ -15,7 +15,10 @@ var RpgIndexComponent = (function () {
     RpgIndexComponent = __decorate([
         core_1.Component({
             selector: 'rpg-index',
-            template: '<h1>My First Angular 2 App</h1>'
+            templateUrl: 'angular/components/rpg/index/rpg-index.tpl.html',
+            styleUrls: [
+                'angular/components/rpg/index/rpg-index.css'
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], RpgIndexComponent);

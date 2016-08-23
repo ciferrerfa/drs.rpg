@@ -9,7 +9,7 @@
 		"experimentalDecorators": true,
 		"removeComments": true,
 		"noImplicitAny": false,
-		"outDir": "client/resources/js"
+		"outDir": "client/resources/js/angular"
 	},
 	"exclude": [
 		".c9", ".data", ".git", "node_modules", "server", "typings",

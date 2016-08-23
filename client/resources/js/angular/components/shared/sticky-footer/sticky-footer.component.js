@@ -9,20 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var rpg_index_component_1 = require('./rpg-index.component');
-var AppModule = (function () {
-    function AppModule() {
+var StickyFooterComponent = (function () {
+    function StickyFooterComponent() {
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [rpg_index_component_1.RpgIndexComponent],
-            bootstrap: [rpg_index_component_1.RpgIndexComponent]
+    StickyFooterComponent = __decorate([
+        core_1.Component({
+            selector: 'sticky-footer',
+            templateUrl: 'angular/components/shared/sticky-footer/sticky-footer.tpl.html',
+            styleUrls: [
+                'angular/components/shared/sticky-footer/sticky-footer.css'
+            ]
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], StickyFooterComponent);
+    return StickyFooterComponent;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.StickyFooterComponent = StickyFooterComponent;
+//# sourceMappingURL=sticky-footer.component.js.map

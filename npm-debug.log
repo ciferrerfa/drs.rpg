@@ -20,7 +20,7 @@
 9 verbose stack     at maybeClose (internal/child_process.js:827:16)
 9 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 10 verbose pkgid drs-rpg@0.0.1
-11 verbose cwd /home/ubuntu/workspace/client/angular
+11 verbose cwd /home/ubuntu/workspace
 12 error Linux 4.2.0-c9
 13 error argv "/home/ubuntu/.nvm/versions/node/v4.4.5/bin/node" "/home/ubuntu/.nvm/versions/node/v4.4.5/bin/npm" "start"
 14 error node v4.4.5

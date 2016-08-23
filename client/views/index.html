@@ -10,21 +10,35 @@
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <meta name='description' content=''>
         <meta name='author' content='Albert Ferré'>
+        
+        <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'>
+        <link rel='icon' href='favicon.ico' type='image/x-icon'>
 		
 		<link rel="stylesheet" href="./resources/css/index.css">
 		
+        <!-- Latest compiled and minified CSS -->
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' />
+        <!-- <link rel='stylesheet' href='https://npmcdn.com/angular-toastr/dist/angular-toastr.css' /> -->
+		
+        <!-- Third-party Libraries -->
+        <!-- jQuery library -->
+        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+        <!-- Latest compiled JavaScript -->
+        <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 		<!-- 1. Load libraries -->
 		<!-- Polyfill(s) for older browsers -->
-		<script src="resources/modules/core-js/client/shim.min.js"></script>
-		<script src="resources/modules/zone.js/dist/zone.js"></script>
-		<script src="resources/modules/reflect-metadata/Reflect.js"></script>
-		<script src="resources/modules/systemjs/dist/system.src.js"></script>
+		<script type='text/javascript' src="resources/modules/core-js/client/shim.min.js"></script>
+		<script type='text/javascript' src="resources/modules/zone.js/dist/zone.js"></script>
+		<script type='text/javascript' src="resources/modules/reflect-metadata/Reflect.js"></script>
+		<script type='text/javascript' src="resources/modules/systemjs/dist/system.src.js"></script>
 		
 		<!-- 2. Configure SystemJS -->
-		<script src="angular/systemjs.config.js"></script>
+		<script type='text/javascript' src="angular/systemjs.config.js"></script>
 		<script>
-			System.import('rpg-index').catch(function(err){ console.error(err); });
+			System.import('rpg').catch(function(err){ console.error(err); });
 		</script>
+		
+        <script type='text/javascript' src='resources/js/bootstrap.js'></script>
 	</head>
 	
 	<!-- 3. Display the application -->

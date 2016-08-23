@@ -1,0 +1,23 @@
+/* ----- Sticky footer styles ----- */
+
+
+/* Wrapper for page content to push down footer */
+#wrap {
+	overflow: auto;
+	min-height: 100%;
+}
+
+#main {
+	margin-top: 32px;
+	margin-bottom: 32px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+	position: relative;
+	margin-top: -32px;
+	height: 32px;
+	clear:both;
+	background-color: #119cd9;
+	color: #ffffff;
+}
