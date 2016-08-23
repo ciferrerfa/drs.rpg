@@ -1,16 +1,8 @@
 // file: ./server/controllers/index.js
 
 var promise = require('bluebird');
-var fs      = undefined;
+var fs      = promise.promisifyAll(require('fs'));
 var path    = require('path');
-
-exports.initialize = function () {
-    
-    fs = require('fs');
-    
-    promise.promisifyAll(fs);
-    
-};
 
 exports.getIndexPage = function (req, res) {
     
