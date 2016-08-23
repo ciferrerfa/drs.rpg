@@ -2,7 +2,7 @@
 
 var promise 		= require('bluebird');
 var mongoose        = require('mongoose');
-var model           = null;
+var model           = undefined;
  
 var schema = new mongoose.Schema({
 	userId: {type: String, trim: true, index: true, unique: true},
@@ -15,6 +15,13 @@ var schema = new mongoose.Schema({
 function getByUserId (userId) {
 	return model.findOne({ userId: new RegExp('^' + userId + '$', 'i') });
 }
+
+exports = function(database) {
+	model = database.model('account', schema);
+	
+	promise.promisifyAll(model);
+	promise.promisifyAll(model.prototype);
+};
 
 exports.add = function(userId, password, email, language, roles) {
 	return new promise(function (resolve, reject) {
@@ -47,13 +54,6 @@ exports.add = function(userId, password, email, language, roles) {
 			reject(new Error('Find error: ' + err));
 		}
 	});
-};
-
-exports.createModel = function(database) {
-	model = database.model('account', schema);
-	
-	promise.promisifyAll(model);
-	promise.promisifyAll(model.prototype);
 };
 
 schema.statics.setLanguage = function (userId, language) {

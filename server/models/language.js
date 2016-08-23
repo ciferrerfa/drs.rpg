@@ -2,12 +2,19 @@
 
 var promise		= require('bluebird');
 var mongoose    = require('mongoose');
-var model       = null;
+var model       = undefined;
 
 var schema = new mongoose.Schema( { 
     code: { type : String, trim : true, index : true, unique: true },
     name: { type : String, trim : true }
 });
+
+exports = function (database) {
+    model = database.model('language', schema);
+    
+    promise.promisifyAll(model);
+    promise.promisifyAll(model.prototype);
+};
 
 function getByCode (code) {
     return model.findOne({ code: new RegExp('^' + code + '$', 'i') });
@@ -43,13 +50,6 @@ exports.add = function (code, name) {
 			reject(new Error('Get error: ' + err));
 		}
     });
-};
-
-exports.createModel = function (database) {
-    model = database.model('language', schema);
-    
-    promise.promisifyAll(model);
-    promise.promisifyAll(model.prototype);
 };
 
 exports.getByCode = function (code) {

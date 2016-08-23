@@ -2,7 +2,7 @@
 
 var promise		= require('bluebird');
 var mongoose    = require('mongoose');
-var model       = null;
+var model       = undefined;
 
 var schema = new mongoose.Schema( { 
     name: { type : String, trim : true, index : true, unique: true }
@@ -11,6 +11,13 @@ var schema = new mongoose.Schema( {
 function getByName (name) {
     return model.findOne({ name: new RegExp('^' + name + '$', 'i') });
 }
+
+exports = function (database) {
+    model = database.model('role', schema);
+    
+    promise.promisifyAll(model);
+    promise.promisifyAll(model.prototype);
+};
 
 exports.add = function (name) {
     return new promise(function (resolve, reject) {
@@ -43,13 +50,6 @@ exports.add = function (name) {
 		}
     });
     
-};
-
-exports.createModel = function (database) {
-    model = database.model('role', schema);
-    
-    promise.promisifyAll(model);
-    promise.promisifyAll(model.prototype);
 };
 
 exports.getByName = function (name) {
