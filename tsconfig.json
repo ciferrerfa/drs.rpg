@@ -1,0 +1,18 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"sourceMap": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"removeComments": true,
+		"noImplicitAny": false,
+		"outDir": "client/resources/js"
+	},
+	"exclude": [
+		".c9", ".data", ".git", "node_modules", "server", "typings",
+		"client/resources/modules"
+	]
+}

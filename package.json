@@ -1,11 +1,15 @@
 {
-  "name": "drs-rpg",
-  "version": "0.0.1",
-  "description": "drs roleplay",
-  "main": "server/server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+	"name": "drs-rpg",
+	"version": "0.0.1",
+	"description": "drs roleplay",
+	"main": "server/server.js",
+	"scripts": {
+  		"start": "tsc && concurrently \"npm run tsc:w\" ",
+		"postinstall": "typings install",
+		"tsc": "tsc",
+		"tsc:w": "tsc -w",
+		"typings": "typings"
+	},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ciferrerfa/drs.rpg.git"
@@ -25,5 +29,10 @@
     "method-override": "^2.3.6",
     "mongoose": "^4.5.9",
     "serve-favicon": "^2.3.0"
-  }
+  },
+	"devDependencies": {
+		"concurrently": "^2.0.0",
+		"typescript": "^1.8.10",
+		"typings":"^1.0.4"
+	}
 }
