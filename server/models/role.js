@@ -1,36 +1,57 @@
 // file: ./app/models/role.js
 
+var promise		= require('bluebird');
 var mongoose    = require('mongoose');
- 
+var model       = null;
+
 var schema = new mongoose.Schema( { 
-    role: { type : String, trim : true, index : true }
+    name: { type : String, trim : true, index : true, unique: true }
 });
 
-schema.statics.findByRole = function(role, callback) {
-    return this.findOne({ role: new RegExp(role, 'i') }, callback);
-};
+function getByName (name) {
+    return model.findOne({ name: new RegExp('^' + name + '$', 'i') });
+}
 
-schema.statics.addRole = function(name, model) {
-    
-    this.findByRole(name, function(err, role) {
-        if (err) {
-            console.log('Error: getting role.');
-        } 
-        else {
-            if (role == null) {
-                var newRole = new model({ role : name });
-                newRole.save();
-            }
-        }
+exports.add = function (name) {
+    return new promise(function (resolve, reject) {
+        getByName(name)
+            .then(findOk)
+            .catch(findError);
+		
+		function findOk (result) {
+			if (result == null) {
+			    var newModel = new model({ name : name });
+			    newModel.save()
+			        .then(addOk)
+			        .catch(addError);
+			}
+			else {
+			    resolve({message: 'Exists: ' + name});
+			}
+		}
+		
+		function addOk (result) {
+		    resolve(result);
+		}
+		
+		function addError (err) {
+			reject(new Error('Add error: ' + err));
+		}
+		
+		function findError (err) {
+			reject(new Error('Find error: ' + err));
+		}
     });
+    
 };
 
-module.exports.model = mongoose.model('role', schema);
+exports.createModel = function (database) {
+    model = database.model('role', schema);
+    
+    promise.promisifyAll(model);
+    promise.promisifyAll(model.prototype);
+};
 
-module.exports.initialize =  function() {
-    
-    this.model.addRole ('administrator', this.model);
-    this.model.addRole ('master', this.model);
-    this.model.addRole ('player', this.model);
-    
+exports.getByName = function (name) {
+	return getByName(name);
 };
