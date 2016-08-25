@@ -1,11 +1,49 @@
-import { Component } from '@angular/core';
+import 'rxjs/Rx';
+
+import { Component, OnInit }		from '@angular/core';
+
+import { AuthenticationService }	from '../index.barrel';
+import { ApiService }				from '../index.barrel';
+
+import { Language }					from '../index.barrel';
 
 @Component({
-    selector: 'nav-bar',
-	templateUrl: 'angular/components/shared/nav-bar/nav-bar.tpl.html',
+	selector: 'nav-bar',
+	templateUrl: 'angular/components/shared/nav-bar/nav-bar.component.tpl.html',
 	styleUrls: [
-		'angular/components/shared/nav-bar/nav-bar.css'
+		'angular/components/shared/nav-bar/nav-bar.component.css'
 	]
 })
 
-export class NavBarComponent { }
+export class NavBarComponent implements OnInit {
+	
+	constructor(
+		private api:	ApiService,
+		private auth:	AuthenticationService) { }
+	
+	private errorMessage:	string		= '';
+	private language:		Language	= { _id: '', code: 'es-ca', name: '', __v:0 };
+	private languages:		Language[]	= [];
+	
+	private setLanguages(languages: Language[]) {
+		this.languages = languages;
+		this.language = languages[0];
+	}
+	
+	private getLanguages() {
+		this.api.getLanguages()
+			.then(languages => this.setLanguages(languages));
+	}
+	
+	ngOnInit() {
+		this.getLanguages();
+	}
+	
+	changeLanguage(language) {
+		this.language = language;
+	}
+	
+	isAuthenticated () : boolean {
+		return this.auth.isAuthenticated();
+	}
+}

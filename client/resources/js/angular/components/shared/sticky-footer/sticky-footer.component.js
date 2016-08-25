@@ -8,21 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var StickyFooterComponent = (function () {
-    function StickyFooterComponent() {
-    }
-    StickyFooterComponent = __decorate([
-        core_1.Component({
-            selector: 'sticky-footer',
-            templateUrl: 'angular/components/shared/sticky-footer/sticky-footer.tpl.html',
-            styleUrls: [
-                'angular/components/shared/sticky-footer/sticky-footer.css'
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], StickyFooterComponent);
-    return StickyFooterComponent;
-}());
+const core_1 = require('@angular/core');
+let StickyFooterComponent = class StickyFooterComponent {
+};
+StickyFooterComponent = __decorate([
+    core_1.Component({
+        selector: 'sticky-footer',
+        templateUrl: 'angular/components/shared/sticky-footer/sticky-footer.component.tpl.html',
+        styleUrls: [
+            'angular/components/shared/sticky-footer/sticky-footer.component.css'
+        ]
+    }), 
+    __metadata('design:paramtypes', [])
+], StickyFooterComponent);
 exports.StickyFooterComponent = StickyFooterComponent;
 //# sourceMappingURL=sticky-footer.component.js.map

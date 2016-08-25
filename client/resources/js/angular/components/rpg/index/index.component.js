@@ -8,21 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var RpgHomeComponent = (function () {
-    function RpgHomeComponent() {
-    }
-    RpgHomeComponent = __decorate([
-        core_1.Component({
-            selector: 'rpg-home',
-            templateUrl: 'angular/components/rpg/home/rpg-home.tpl.html',
-            styleUrls: [
-                'angular/components/rpg/home/rpg-home.css'
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], RpgHomeComponent);
-    return RpgHomeComponent;
-}());
-exports.RpgHomeComponent = RpgHomeComponent;
-//# sourceMappingURL=rpg-home.component.js.map
+const core_1 = require('@angular/core');
+let IndexComponent = class IndexComponent {
+};
+IndexComponent = __decorate([
+    core_1.Component({
+        selector: 'rpg-index',
+        templateUrl: 'angular/components/rpg/index/index.component.tpl.html',
+        styleUrls: [
+            'angular/components/rpg/index/index.component.css'
+        ]
+    }), 
+    __metadata('design:paramtypes', [])
+], IndexComponent);
+exports.IndexComponent = IndexComponent;
+//# sourceMappingURL=index.component.js.map

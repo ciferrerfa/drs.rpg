@@ -9,13 +9,6 @@ var schema = new mongoose.Schema( {
     name: { type : String, trim : true }
 });
 
-exports = function (database) {
-    model = database.model('language', schema);
-    
-    promise.promisifyAll(model);
-    promise.promisifyAll(model.prototype);
-};
-
 function getByCode (code) {
     return model.findOne({ code: new RegExp('^' + code + '$', 'i') });
 }
@@ -52,6 +45,17 @@ exports.add = function (code, name) {
     });
 };
 
+exports.getAll = function () {
+	return model.find().exec();
+};
+
 exports.getByCode = function (code) {
 	return getByCode(code);
+};
+
+exports.initialize = function (database) {
+    model = database.model('language', schema);
+    
+    promise.promisifyAll(model);
+    promise.promisifyAll(model.prototype);
 };

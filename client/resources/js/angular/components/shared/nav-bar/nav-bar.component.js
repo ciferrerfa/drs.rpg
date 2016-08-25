@@ -8,21 +8,45 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var NavBarComponent = (function () {
-    function NavBarComponent() {
+require('rxjs/Rx');
+const core_1 = require('@angular/core');
+const index_barrel_1 = require('../index.barrel');
+const index_barrel_2 = require('../index.barrel');
+let NavBarComponent = class NavBarComponent {
+    constructor(api, auth) {
+        this.api = api;
+        this.auth = auth;
+        this.errorMessage = '';
+        this.language = { _id: '', code: 'es-ca', name: '', __v: 0 };
+        this.languages = [];
     }
-    NavBarComponent = __decorate([
-        core_1.Component({
-            selector: 'nav-bar',
-            templateUrl: 'angular/components/shared/nav-bar/nav-bar.tpl.html',
-            styleUrls: [
-                'angular/components/shared/nav-bar/nav-bar.css'
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], NavBarComponent);
-    return NavBarComponent;
-}());
+    setLanguages(languages) {
+        this.languages = languages;
+        this.language = languages[0];
+    }
+    getLanguages() {
+        this.api.getLanguages()
+            .then(languages => this.setLanguages(languages));
+    }
+    ngOnInit() {
+        this.getLanguages();
+    }
+    changeLanguage(language) {
+        this.language = language;
+    }
+    isAuthenticated() {
+        return this.auth.isAuthenticated();
+    }
+};
+NavBarComponent = __decorate([
+    core_1.Component({
+        selector: 'nav-bar',
+        templateUrl: 'angular/components/shared/nav-bar/nav-bar.component.tpl.html',
+        styleUrls: [
+            'angular/components/shared/nav-bar/nav-bar.component.css'
+        ]
+    }), 
+    __metadata('design:paramtypes', [index_barrel_2.ApiService, index_barrel_1.AuthenticationService])
+], NavBarComponent);
 exports.NavBarComponent = NavBarComponent;
 //# sourceMappingURL=nav-bar.component.js.map

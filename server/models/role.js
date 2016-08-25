@@ -12,13 +12,6 @@ function getByName (name) {
     return model.findOne({ name: new RegExp('^' + name + '$', 'i') });
 }
 
-exports = function (database) {
-    model = database.model('role', schema);
-    
-    promise.promisifyAll(model);
-    promise.promisifyAll(model.prototype);
-};
-
 exports.add = function (name) {
     return new promise(function (resolve, reject) {
         getByName(name)
@@ -52,6 +45,17 @@ exports.add = function (name) {
     
 };
 
+exports.getAll = function () {
+	return model.find().exec();
+};
+
 exports.getByName = function (name) {
 	return getByName(name);
+};
+
+exports.initialize = function (database) {
+    model = database.model('role', schema);
+    
+    promise.promisifyAll(model);
+    promise.promisifyAll(model.prototype);
 };

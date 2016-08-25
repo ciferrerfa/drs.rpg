@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'sticky-footer',
-	templateUrl: 'angular/components/shared/sticky-footer/sticky-footer.tpl.html',
+	templateUrl: 'angular/components/shared/sticky-footer/sticky-footer.component.tpl.html',
 	styleUrls: [
-		'angular/components/shared/sticky-footer/sticky-footer.css'
+		'angular/components/shared/sticky-footer/sticky-footer.component.css'
 	]
 })
 

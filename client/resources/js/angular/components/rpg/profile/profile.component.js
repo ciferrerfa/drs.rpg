@@ -8,21 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var RpgIndexComponent = (function () {
-    function RpgIndexComponent() {
-    }
-    RpgIndexComponent = __decorate([
-        core_1.Component({
-            selector: 'rpg-index',
-            templateUrl: 'angular/components/rpg/index/rpg-index.tpl.html',
-            styleUrls: [
-                'angular/components/rpg/index/rpg-index.css'
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], RpgIndexComponent);
-    return RpgIndexComponent;
-}());
-exports.RpgIndexComponent = RpgIndexComponent;
-//# sourceMappingURL=rpg-index.component.js.map
+const core_1 = require('@angular/core');
+let ProfileComponent = class ProfileComponent {
+};
+ProfileComponent = __decorate([
+    core_1.Component({
+        selector: 'rpg-profile',
+        templateUrl: 'angular/components/rpg/profile/profile.component.tpl.html',
+        styleUrls: [
+            'angular/components/rpg/profile/profile.component.css'
+        ]
+    }), 
+    __metadata('design:paramtypes', [])
+], ProfileComponent);
+exports.ProfileComponent = ProfileComponent;
+//# sourceMappingURL=profile.component.js.map

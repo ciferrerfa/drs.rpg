@@ -1,7 +1,7 @@
 {
 	"compileOnSave": true,
 	"compilerOptions": {
-		"target": "es5",
+		"target": "es6",
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"sourceMap": true,
@@ -9,10 +9,11 @@
 		"experimentalDecorators": true,
 		"removeComments": true,
 		"noImplicitAny": false,
+		"rootDir": "client/angular",
 		"outDir": "client/resources/js/angular"
 	},
 	"exclude": [
 		".c9", ".data", ".git", "node_modules", "server", "typings",
-		"client/resources/modules"
+		"client/resources/modules", "node_modules/@angular", "node_modules/rxjs"
 	]
 }

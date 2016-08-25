@@ -13,17 +13,19 @@ var schema = new mongoose.Schema({
 });
 
 function getByUserId (userId) {
-	return model.findOne({ userId: new RegExp('^' + userId + '$', 'i') });
+	return model.findOne({
+		userId: new RegExp('^' + userId + '$', 'i')
+	});
 }
 
-exports = function(database) {
-	model = database.model('account', schema);
-	
-	promise.promisifyAll(model);
-	promise.promisifyAll(model.prototype);
-};
+function getByUserIdPassword(userId, password) {
+	return model.findOne({ 
+		userId: new RegExp('^' + userId + '$', 'i'), 
+		password: new RegExp('^' + password + '$', 'i')
+	});
+}
 
-exports.add = function(userId, password, email, language, roles) {
+exports.add = function (userId, password, email, language, roles) {
 	return new promise(function (resolve, reject) {
 		getByUserId(userId)
 			.then(findOk)
@@ -56,7 +58,31 @@ exports.add = function(userId, password, email, language, roles) {
 	});
 };
 
-schema.statics.setLanguage = function (userId, language) {
+exports.initialize = function(database) {
+	model = database.model('account', schema);
+	
+	promise.promisifyAll(model);
+	promise.promisifyAll(model.prototype);
+};
+
+exports.login = function (userId, password) {
+	
+	return new promise(function (resolve, reject) {
+		getByUserIdPassword(userId, password)
+			.then(findOk)
+			.catch(findError);
+		
+		function findOk (result) {
+			resolve(result);
+		}
+		
+		function findError (err) {
+			reject(new Error('Find error: ' + err));
+		}
+	});
+};
+
+exports.setLanguage = function (userId, language) {
 	return new promise(function (resolve, reject) {
 		getByUserId(userId)
 			.then(findOk)
