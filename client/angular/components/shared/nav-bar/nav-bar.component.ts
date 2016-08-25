@@ -17,33 +17,51 @@ import { Language }					from '../index.barrel';
 
 export class NavBarComponent implements OnInit {
 	
-	constructor(
-		private api:	ApiService,
-		private auth:	AuthenticationService) { }
-	
 	private errorMessage:	string		= '';
 	private language:		Language	= { _id: '', code: 'es-ca', name: '', __v:0 };
 	private languages:		Language[]	= [];
 	
-	private setLanguages(languages: Language[]) {
+	constructor (
+		private api:	ApiService,
+		private auth:	AuthenticationService) { }
+	
+	private setLanguages (languages: Language[]) {
 		this.languages = languages;
-		this.language = languages[0];
+		this.language = (this.isAuthenticated())
+			? this.getLanguage()
+				: languages[0];
 	}
 	
-	private getLanguages() {
+	private getLanguages () {
 		this.api.getLanguages()
 			.then(languages => this.setLanguages(languages));
 	}
 	
-	ngOnInit() {
+	ngOnInit () {
 		this.getLanguages();
 	}
 	
-	changeLanguage(language) {
+	changeLanguage (language) {
 		this.language = language;
 	}
 	
 	isAuthenticated () : boolean {
 		return this.auth.isAuthenticated();
+	}
+	
+	getUserId () : string {
+		return (this.auth.getAccount()!=undefined)
+			? this.auth.getAccount().userId
+				: '';
+	}
+	
+	getLanguage () : Language {
+		return (this.auth.getAccount()!=undefined)
+			? this.auth.getAccount().language
+				: { _id: '', code: 'es-ca', name: '', __v:0 };
+	}
+	
+	logout () {
+		this.auth.logout();
 	}
 }

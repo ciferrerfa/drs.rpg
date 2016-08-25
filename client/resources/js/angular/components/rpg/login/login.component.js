@@ -32,7 +32,7 @@ let LoginComponent = class LoginComponent {
     }
     resolveLogin() {
         if (this.auth.isAuthenticated()) {
-            this.router.navigate(['../Home']);
+            this.router.navigate(['../profile']);
         }
         else {
             this.error = true;

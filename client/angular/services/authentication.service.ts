@@ -4,6 +4,8 @@ import { Injectable }				from '@angular/core';
 import { Http, Headers, Response }	from '@angular/http';
 import { Observable }				from 'rxjs/Rx'; //'rxjs/Observable';
 
+import { Account }					from '../models/account.model';
+
 //{auth: false, data: 'errordatabase', token: null}
 export class Auth {
 	auth:	boolean;
@@ -19,11 +21,14 @@ export class AuthenticationService {
 	private singupEndPoint : string = '/authentication/singup';
 	
 	private localStorageToken : string = 'rpg-token-auth';
+	private localStorageAccount : string = 'rpg-account-auth';
 	
-	private token: string;
+	private token:		string	=	undefined;
+	private account:	Account	=	undefined;
 	
 	constructor (private http: Http) {
 		this.token = localStorage.getItem(this.localStorageToken);
+		this.account = JSON.parse(localStorage.getItem(this.localStorageAccount));
 	}
 	
 	private handleError (error: any): Promise<any> {
@@ -49,6 +54,17 @@ export class AuthenticationService {
 		}
 	}
 	
+	private setAccount (account: Account) {
+		this.account = account;
+		
+		if (account == undefined) {
+			localStorage.removeItem(this.localStorageAccount);
+		}
+		else {
+			localStorage.setItem(this.localStorageAccount, JSON.stringify(this.account));
+		}
+	}
+	
 	login (userId: string, password: string): Promise<Auth> {
 		var params = JSON.stringify({userId: userId, password: password});
 		var headers = { headers: new Headers({'Content-Type': 'application/json'}) };
@@ -61,12 +77,13 @@ export class AuthenticationService {
 		
 		if (result.auth) {
 			this.setToken(result.token);
+			this.setAccount(result.data);
 		}
 		
 		return result;
 	}
 	
-	logout() {
+	logout () {
 		var params = JSON.stringify({ });
 		var headers = { headers: new Headers({'x-security-token': this.token}) };
 		
@@ -78,6 +95,7 @@ export class AuthenticationService {
 		
 		if (result.auth) {
 			this.setToken(undefined);
+			this.setAccount(undefined);
 		}
 		
 		return result;
@@ -100,8 +118,12 @@ export class AuthenticationService {
 		return result;
 	}
 	
-	isAuthenticated() {
+	isAuthenticated () {
 		return !!localStorage.getItem(this.localStorageToken);
+	}
+	
+	getAccount () : Account {
+		return this.account;
 	}
 	
 }

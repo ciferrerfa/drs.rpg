@@ -22,7 +22,11 @@ let AuthenticationService = class AuthenticationService {
         this.logoutEndPoint = '/authentication/logout';
         this.singupEndPoint = '/authentication/singup';
         this.localStorageToken = 'rpg-token-auth';
+        this.localStorageAccount = 'rpg-account-auth';
+        this.token = undefined;
+        this.account = undefined;
         this.token = localStorage.getItem(this.localStorageToken);
+        this.account = JSON.parse(localStorage.getItem(this.localStorageAccount));
     }
     handleError(error) {
         console.error('An error occurred', error);
@@ -43,6 +47,15 @@ let AuthenticationService = class AuthenticationService {
             localStorage.setItem(this.localStorageToken, this.token);
         }
     }
+    setAccount(account) {
+        this.account = account;
+        if (account == undefined) {
+            localStorage.removeItem(this.localStorageAccount);
+        }
+        else {
+            localStorage.setItem(this.localStorageAccount, JSON.stringify(this.account));
+        }
+    }
     login(userId, password) {
         var params = JSON.stringify({ userId: userId, password: password });
         var headers = { headers: new http_1.Headers({ 'Content-Type': 'application/json' }) };
@@ -52,6 +65,7 @@ let AuthenticationService = class AuthenticationService {
     resolveLogin(result) {
         if (result.auth) {
             this.setToken(result.token);
+            this.setAccount(result.data);
         }
         return result;
     }
@@ -64,6 +78,7 @@ let AuthenticationService = class AuthenticationService {
     resolveLogout(result) {
         if (result.auth) {
             this.setToken(undefined);
+            this.setAccount(undefined);
         }
         return result;
     }
@@ -81,6 +96,9 @@ let AuthenticationService = class AuthenticationService {
     }
     isAuthenticated() {
         return !!localStorage.getItem(this.localStorageToken);
+    }
+    getAccount() {
+        return this.account;
     }
 };
 AuthenticationService = __decorate([

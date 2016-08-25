@@ -5,4 +5,4 @@ function __export(m) {
 __export(require('./account.model'));
 __export(require('./language.model'));
 __export(require('./role.model'));
-//# sourceMappingURL=index.barrel.js.map
+//# sourceMappingURL=.index.barrel.js.map

@@ -16,9 +16,25 @@ exports.login = function(req, res) {
 		
 		model.initialize(database);
 		
-		model.login(req.body.userId, req.body.password)
+		login(model, req.body.userId, req.body.password)
 			.then(loginOk)
-			.catch(loginError());
+			.catch(loginError);
+			
+		function login (model, userId, password) {
+			return  new promise(function (resolve, reject) {
+				model.login(userId, password)
+					.then(modelLoginOk)
+					.catch(modelLoginError);
+				
+				function modelLoginOk (result) {
+					resolve(result);
+				}
+				
+				function modelLoginError (err) {
+					reject(new Error('Add error: ' + err));
+				}
+			});
+		}
 			
 		function loginOk (account) {
 			if (account == null) {

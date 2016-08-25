@@ -22,7 +22,9 @@ let NavBarComponent = class NavBarComponent {
     }
     setLanguages(languages) {
         this.languages = languages;
-        this.language = languages[0];
+        this.language = (this.isAuthenticated())
+            ? this.getLanguage()
+            : languages[0];
     }
     getLanguages() {
         this.api.getLanguages()
@@ -36,6 +38,19 @@ let NavBarComponent = class NavBarComponent {
     }
     isAuthenticated() {
         return this.auth.isAuthenticated();
+    }
+    getUserId() {
+        return (this.auth.getAccount() != undefined)
+            ? this.auth.getAccount().userId
+            : '';
+    }
+    getLanguage() {
+        return (this.auth.getAccount() != undefined)
+            ? this.auth.getAccount().language
+            : { _id: '', code: 'es-ca', name: '', __v: 0 };
+    }
+    logout() {
+        this.auth.logout();
     }
 };
 NavBarComponent = __decorate([

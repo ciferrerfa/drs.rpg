@@ -22,7 +22,8 @@ function getByUserIdPassword(userId, password) {
 	return model.findOne({ 
 		userId: new RegExp('^' + userId + '$', 'i'), 
 		password: new RegExp('^' + password + '$', 'i')
-	});
+	})
+	//.populate([{path:'language', select:'language'}, {path:'role', select:'roles'}]);
 }
 
 exports.add = function (userId, password, email, language, roles) {
@@ -34,7 +35,7 @@ exports.add = function (userId, password, email, language, roles) {
 		function findOk (result) {
 			if (result == null) {
 				console.log('adding ' + userId);
-				var newModel = new model({userId : userId, password: password, email: email, language: language, roles: roles });
+				var newModel = new model({userId : userId, password: password, email: email, language: language, roles: roles});
 				newModel.save()
 					.then(saveOk)
 					.catch(saveError);
@@ -66,9 +67,8 @@ exports.initialize = function(database) {
 };
 
 exports.login = function (userId, password) {
-	
 	return new promise(function (resolve, reject) {
-		getByUserIdPassword(userId, password)
+		getByUserIdPassword(userId)
 			.then(findOk)
 			.catch(findError);
 		

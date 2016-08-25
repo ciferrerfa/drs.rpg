@@ -35,10 +35,11 @@ export class LoginComponent implements OnInit {
 	onSubmit(value: any) {
 		this.auth.login(value.userId, value.password)
 			.then(data => this.resolveLogin());
+	}
 	
 	private resolveLogin() {
 		if (this.auth.isAuthenticated()) {
-			this.router.navigate(['../Home'])
+			this.router.navigate(['../profile'])
 		}
 		else {
 			this.error = true;

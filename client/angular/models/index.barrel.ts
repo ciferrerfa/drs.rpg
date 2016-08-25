@@ -1,2 +1,3 @@
+export * from './account.model';
 export * from './language.model';
-export * from './role.model';
+export * from './role.model'; 
