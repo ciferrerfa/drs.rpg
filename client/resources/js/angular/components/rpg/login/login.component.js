@@ -14,9 +14,9 @@ const common_2 = require('@angular/common');
 const router_1 = require('@angular/router');
 const index_barrel_1 = require('../index.barrel');
 let LoginComponent = class LoginComponent {
-    constructor(fb, auth, router) {
+    constructor(fb, session, router) {
         this.fb = fb;
-        this.auth = auth;
+        this.session = session;
         this.router = router;
         this.error = false;
     }
@@ -27,11 +27,11 @@ let LoginComponent = class LoginComponent {
         });
     }
     onSubmit(value) {
-        this.auth.login(value.userId, value.password)
+        this.session.login(value.userId, value.password)
             .then(data => this.resolveLogin());
     }
     resolveLogin() {
-        if (this.auth.isAuthenticated()) {
+        if (this.session.isAuthenticated()) {
             this.router.navigate(['../profile']);
         }
         else {
@@ -48,7 +48,7 @@ LoginComponent = __decorate([
             'angular/components/rpg/login/login.component.css'
         ]
     }), 
-    __metadata('design:paramtypes', [common_1.FormBuilder, index_barrel_1.AuthenticationService, router_1.Router])
+    __metadata('design:paramtypes', [common_1.FormBuilder, index_barrel_1.SessionService, router_1.Router])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

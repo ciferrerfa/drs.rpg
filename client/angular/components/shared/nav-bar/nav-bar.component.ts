@@ -1,11 +1,10 @@
 import 'rxjs/Rx';
 
-import { Component, OnInit }		from '@angular/core';
+import { Component, OnInit }			from '@angular/core';
 
-import { AuthenticationService }	from '../index.barrel';
-import { ApiService }				from '../index.barrel';
+import { ApiService, SessionService }	from '../index.barrel';
 
-import { Language }					from '../index.barrel';
+import { Language }						from '../index.barrel';
 
 @Component({
 	selector: 'nav-bar',
@@ -22,46 +21,60 @@ export class NavBarComponent implements OnInit {
 	private languages:		Language[]	= [];
 	
 	constructor (
-		private api:	ApiService,
-		private auth:	AuthenticationService) { }
-	
-	private setLanguages (languages: Language[]) {
-		this.languages = languages;
-		this.language = (this.isAuthenticated())
-			? this.getLanguage()
-				: languages[0];
-	}
-	
-	private getLanguages () {
-		this.api.getLanguages()
-			.then(languages => this.setLanguages(languages));
-	}
+		private api:		ApiService,
+		private session:	SessionService) { }
 	
 	ngOnInit () {
+		
 		this.getLanguages();
 	}
 	
 	changeLanguage (language) {
-		this.language = language;
-	}
-	
-	isAuthenticated () : boolean {
-		return this.auth.isAuthenticated();
+		
+		this.api.setAccountLanguage(language);
+		this.session.setLanguage(language);
+		this.language = this.session.getLanguage();
 	}
 	
 	getUserId () : string {
-		return (this.auth.getAccount()!=undefined)
-			? this.auth.getAccount().userId
+		
+		return (this.session.getAccount() != undefined)
+			? this.session.getAccount().userId
 				: '';
 	}
 	
-	getLanguage () : Language {
-		return (this.auth.getAccount()!=undefined)
-			? this.auth.getAccount().language
-				: { _id: '', code: 'es-ca', name: '', __v:0 };
+	private handleError(error: any) {
+		console.log('An error occurred: ' + error);
+	}
+	
+	isAuthenticated () : boolean {
+		
+		return this.session.isAuthenticated();
 	}
 	
 	logout () {
-		this.auth.logout();
+		
+		this.session.logout();
 	}
+	
+	private getLanguages () {
+		
+		this.api.getLanguages()
+			.then(languages => this.setLanguages(languages))
+			.catch(this.handleError);
+	}
+	
+	private setLanguages (languages: Language[]) {
+		
+		this.languages = languages;
+		this.setLanguage(languages[0]);
+	}
+	
+	private setLanguage (language: Language) {
+		
+		this.language = (this.session.isAuthenticated())
+			? this.session.getLanguage()
+				: language;
+	}
+	
 }

@@ -16,6 +16,7 @@ const common_1 = require('@angular/common');
 const index_routing_1 = require('../routings/index.routing');
 const api_service_1 = require('../services/api.service');
 const authentication_service_1 = require('../services/authentication.service');
+const session_service_1 = require('../services/session.service');
 const index_component_1 = require('../components/rpg/index/index.component');
 const nav_bar_component_1 = require('../components/shared/nav-bar/nav-bar.component');
 const sticky_footer_component_1 = require('../components/shared/sticky-footer/sticky-footer.component');
@@ -27,24 +28,15 @@ let RpgModule = class RpgModule {
 RpgModule = __decorate([
     core_1.NgModule({
         imports: [
-            platform_browser_1.BrowserModule,
-            forms_1.FormsModule,
-            http_1.HttpModule,
-            http_1.JsonpModule,
+            platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule,
             index_routing_1.IndexRouting
         ],
         declarations: [
-            index_component_1.IndexComponent,
-            nav_bar_component_1.NavBarComponent,
-            sticky_footer_component_1.StickyFooterComponent,
-            home_component_1.HomeComponent,
-            login_component_1.LoginComponent,
-            profile_component_1.ProfileComponent
+            index_component_1.IndexComponent, nav_bar_component_1.NavBarComponent, sticky_footer_component_1.StickyFooterComponent, home_component_1.HomeComponent,
+            login_component_1.LoginComponent, profile_component_1.ProfileComponent
         ],
         providers: [
-            common_1.FormBuilder,
-            api_service_1.ApiService,
-            authentication_service_1.AuthenticationService
+            common_1.FormBuilder, api_service_1.ApiService, authentication_service_1.AuthenticationService, session_service_1.SessionService
         ],
         bootstrap: [
             index_component_1.IndexComponent

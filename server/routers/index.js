@@ -8,8 +8,11 @@ var router  = express.Router();
 var controller = require(path.join(global.__root + '/server/controllers/index.js'));
 
 router
-    //.use(require(path.join(global.__root + '/app/middlewares/log.js')).logRequest)
+    //.use(require(path.join(global.__root + '/server/middlewares/log.js')).logRequest)
     .get('/', function(req, res) { controller.getIndexPage(req, res); })
-    .get('/index.html', function(req, res) { controller.getIndexPage(req, res); });
+    .get('/index.html', function(req, res) { controller.getIndexPage(req, res); })
+    .get('/home', function(req, res) { controller.getIndexPage(req, res); })
+    .get('/login', function(req, res) { controller.getIndexPage(req, res); })
+    .get('/profile', function(req, res) { controller.getIndexPage(req, res); });
 
 module.exports.router = router;

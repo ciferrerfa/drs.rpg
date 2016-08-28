@@ -4,7 +4,7 @@ import { FORM_DIRECTIVES, FormBuilder }		from '@angular/common';
 import { Validators, ControlGroup, NgIf }	from '@angular/common';
 import { Router }							from '@angular/router';
 
-import { AuthenticationService }			from '../index.barrel';
+import { SessionService }					from '../index.barrel';
 
 @Component({
 	selector:   'rpg-login',
@@ -21,9 +21,9 @@ export class LoginComponent implements OnInit {
 	private error:	boolean			= false;
 	
 	constructor(
-		private fb:		FormBuilder, 
-		private auth:	AuthenticationService,
-		private router:	Router) { }
+		private fb:			FormBuilder, 
+		private session:	SessionService,
+		private router:		Router) { }
 	
 	ngOnInit() {
 		this.form = this.fb.group({
@@ -33,12 +33,12 @@ export class LoginComponent implements OnInit {
 	}
 	
 	onSubmit(value: any) {
-		this.auth.login(value.userId, value.password)
+		this.session.login(value.userId, value.password)
 			.then(data => this.resolveLogin());
 	}
 	
 	private resolveLogin() {
-		if (this.auth.isAuthenticated()) {
+		if (this.session.isAuthenticated()) {
 			this.router.navigate(['../profile'])
 		}
 		else {

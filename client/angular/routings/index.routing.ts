@@ -11,4 +11,4 @@ const appRoutes: Routes = [
 	{ path: 'profile', component: ProfileComponent }
 ];
 
-export const IndexRouting = RouterModule.forRoot(appRoutes);
+export const IndexRouting = RouterModule.forRoot(appRoutes); 

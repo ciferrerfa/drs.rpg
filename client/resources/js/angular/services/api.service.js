@@ -11,24 +11,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 require('rxjs/add/operator/toPromise');
 const core_1 = require('@angular/core');
 const http_1 = require('@angular/http');
+const http_client_service_1 = require('./http-client.service');
 let ApiService = class ApiService {
     constructor(http) {
         this.http = http;
-        this.languageEndPoint = '/api/language';
-        this.roleEndPoint = '/api/role';
     }
     handleError(error) {
-        console.error('An error occurred', error);
+        console.log('An error occurred: ' + error);
         return Promise.reject(error.message || error);
     }
     getLanguages() {
-        return this.http.get(this.languageEndPoint)
+        return this.http.get(http_client_service_1.EndPoint.language)
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
     getLanguage(code) {
-        return this.http.get(this.languageEndPoint)
+        return this.http.get(http_client_service_1.EndPoint.language)
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
+    setAccountLanguage(language) {
+        return this.http.put(http_client_service_1.EndPoint.account + '/language', JSON.stringify(language))
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);

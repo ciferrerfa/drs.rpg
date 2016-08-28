@@ -12,12 +12,3 @@ export class Account {
 	__v:		number;
 	
 }
-
-/*
-
-	userId: {type: String, trim: true, index: true, unique: true},
-	password: {type: String},
-	email: {type: String, trim: true},
-	language: {type: mongoose.Schema.Types.ObjectId, ref: 'language'}, 
-	roles: [{role: {type: mongoose.Schema.Types.ObjectId, ref: 'role'}}]
-*/

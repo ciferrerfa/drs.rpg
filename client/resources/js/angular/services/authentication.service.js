@@ -21,15 +21,9 @@ let AuthenticationService = class AuthenticationService {
         this.loginEndPoint = '/authentication/login';
         this.logoutEndPoint = '/authentication/logout';
         this.singupEndPoint = '/authentication/singup';
-        this.localStorageToken = 'rpg-token-auth';
-        this.localStorageAccount = 'rpg-account-auth';
-        this.token = undefined;
-        this.account = undefined;
-        this.token = localStorage.getItem(this.localStorageToken);
-        this.account = JSON.parse(localStorage.getItem(this.localStorageAccount));
     }
     handleError(error) {
-        console.error('An error occurred', error);
+        console.log('An error occurred ' + error);
         return Promise.reject(error.message || error);
     }
     httpPost(endPoint, params, headers) {
@@ -38,67 +32,20 @@ let AuthenticationService = class AuthenticationService {
             .then(response => response.json())
             .catch(this.handleError);
     }
-    setToken(token) {
-        this.token = token;
-        if (token == undefined) {
-            localStorage.removeItem(this.localStorageToken);
-        }
-        else {
-            localStorage.setItem(this.localStorageToken, this.token);
-        }
-    }
-    setAccount(account) {
-        this.account = account;
-        if (account == undefined) {
-            localStorage.removeItem(this.localStorageAccount);
-        }
-        else {
-            localStorage.setItem(this.localStorageAccount, JSON.stringify(this.account));
-        }
-    }
     login(userId, password) {
         var params = JSON.stringify({ userId: userId, password: password });
         var headers = { headers: new http_1.Headers({ 'Content-Type': 'application/json' }) };
-        return this.httpPost(this.loginEndPoint, params, headers)
-            .then(response => this.resolveLogin(response));
+        return this.httpPost(this.loginEndPoint, params, headers);
     }
-    resolveLogin(result) {
-        if (result.auth) {
-            this.setToken(result.token);
-            this.setAccount(result.data);
-        }
-        return result;
-    }
-    logout() {
+    logout(token) {
         var params = JSON.stringify({});
-        var headers = { headers: new http_1.Headers({ 'x-security-token': this.token }) };
-        return this.httpPost(this.logoutEndPoint, params, headers)
-            .then(response => this.resolveLogout(response));
-    }
-    resolveLogout(result) {
-        if (result.auth) {
-            this.setToken(undefined);
-            this.setAccount(undefined);
-        }
-        return result;
+        var headers = { headers: new http_1.Headers({ 'x-security-token': token }) };
+        return this.httpPost(this.logoutEndPoint, params, headers);
     }
     singup(userId, password, email) {
         var params = JSON.stringify({ userId: userId, password: password, email: email });
         var headers = { headers: new http_1.Headers({ 'Content-Type': 'application/json' }) };
-        return this.httpPost(this.singupEndPoint, params, headers)
-            .then(response => this.resolveSingup(response));
-    }
-    resolveSingup(result) {
-        if (result.auth) {
-            this.setToken(result.token);
-        }
-        return result;
-    }
-    isAuthenticated() {
-        return !!localStorage.getItem(this.localStorageToken);
-    }
-    getAccount() {
-        return this.account;
+        return this.httpPost(this.singupEndPoint, params, headers);
     }
 };
 AuthenticationService = __decorate([

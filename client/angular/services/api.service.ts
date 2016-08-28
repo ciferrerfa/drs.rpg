@@ -1,38 +1,45 @@
 import 'rxjs/add/operator/toPromise';
 
-import { Injectable }				from '@angular/core';
-import { Http, Response }			from '@angular/http';
-import { Observable }				from 'rxjs/Rx'; //'rxjs/Observable';
+import { Injectable }			from '@angular/core';
+import { Response, Http, Headers }				from '@angular/http';
+import { Observable }			from 'rxjs/Rx'; //'rxjs/Observable';
 
-import { Role }						from '../models/role.model';
-import { Language }					from '../models/language.model';
+import { EndPoint }				from './http-client.service';
+import { Role }					from '../models/role.model';
+import { Language }				from '../models/language.model';
 
 @Injectable()
 export class ApiService {
 	
-	private languageEndPoint : string = '/api/language'; 
-	private roleEndPoint : string = '/api/role';
-	
 	constructor(
 		private http: Http) { }
 	
+	//constructor(private http: HttpClient) { }
+	
 	private handleError(error: any): Promise<any> {
-		console.error('An error occurred', error);
+		console.log('An error occurred: ' + error);
 		return Promise.reject(error.message || error);
 	}
 	
 	getLanguages(): Promise<Language[]> {
-		return this.http.get(this.languageEndPoint)
+		return this.http.get(EndPoint.language)
 			.toPromise()
 			.then(response => response.json().data as Language[])
 			.catch(this.handleError);
 	}
 	
 	getLanguage(code: string): Promise<Language> {
-		return this.http.get(this.languageEndPoint)
+		return this.http.get(EndPoint.language)
 			.toPromise()
 			.then(response => response.json().data as Language)
 			.catch(this.handleError);
+	}
+	
+	setAccountLanguage(language: Language): Promise<Language> {
+		return this.http.put(EndPoint.account + '/language', JSON.stringify(language))
+			.toPromise()
+			.then(response => response.json().data as Language)
+			.catch(this.handleError); 
 	}
 	
 	/*

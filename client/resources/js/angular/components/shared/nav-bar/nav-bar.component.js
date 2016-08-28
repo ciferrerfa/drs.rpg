@@ -11,46 +11,49 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 require('rxjs/Rx');
 const core_1 = require('@angular/core');
 const index_barrel_1 = require('../index.barrel');
-const index_barrel_2 = require('../index.barrel');
 let NavBarComponent = class NavBarComponent {
-    constructor(api, auth) {
+    constructor(api, session) {
         this.api = api;
-        this.auth = auth;
+        this.session = session;
         this.errorMessage = '';
         this.language = { _id: '', code: 'es-ca', name: '', __v: 0 };
         this.languages = [];
-    }
-    setLanguages(languages) {
-        this.languages = languages;
-        this.language = (this.isAuthenticated())
-            ? this.getLanguage()
-            : languages[0];
-    }
-    getLanguages() {
-        this.api.getLanguages()
-            .then(languages => this.setLanguages(languages));
     }
     ngOnInit() {
         this.getLanguages();
     }
     changeLanguage(language) {
-        this.language = language;
-    }
-    isAuthenticated() {
-        return this.auth.isAuthenticated();
+        this.api.setAccountLanguage(language);
+        this.session.setLanguage(language);
+        this.language = this.session.getLanguage();
     }
     getUserId() {
-        return (this.auth.getAccount() != undefined)
-            ? this.auth.getAccount().userId
+        return (this.session.getAccount() != undefined)
+            ? this.session.getAccount().userId
             : '';
     }
-    getLanguage() {
-        return (this.auth.getAccount() != undefined)
-            ? this.auth.getAccount().language
-            : { _id: '', code: 'es-ca', name: '', __v: 0 };
+    handleError(error) {
+        console.log('An error occurred: ' + error);
+    }
+    isAuthenticated() {
+        return this.session.isAuthenticated();
     }
     logout() {
-        this.auth.logout();
+        this.session.logout();
+    }
+    getLanguages() {
+        this.api.getLanguages()
+            .then(languages => this.setLanguages(languages))
+            .catch(this.handleError);
+    }
+    setLanguages(languages) {
+        this.languages = languages;
+        this.setLanguage(languages[0]);
+    }
+    setLanguage(language) {
+        this.language = (this.session.isAuthenticated())
+            ? this.session.getLanguage()
+            : language;
     }
 };
 NavBarComponent = __decorate([
@@ -61,7 +64,7 @@ NavBarComponent = __decorate([
             'angular/components/shared/nav-bar/nav-bar.component.css'
         ]
     }), 
-    __metadata('design:paramtypes', [index_barrel_2.ApiService, index_barrel_1.AuthenticationService])
+    __metadata('design:paramtypes', [index_barrel_1.ApiService, index_barrel_1.SessionService])
 ], NavBarComponent);
 exports.NavBarComponent = NavBarComponent;
 //# sourceMappingURL=nav-bar.component.js.map

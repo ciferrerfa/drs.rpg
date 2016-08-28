@@ -1,7 +1,7 @@
 import { Component }					from '@angular/core';
 import { CanActivate }					from '@angular/router';
 
-import { AuthenticationService }		from '../index.barrel';
+import { SessionService }		from '../index.barrel';
 
 @Component({
 	selector: 'rpg-profile',

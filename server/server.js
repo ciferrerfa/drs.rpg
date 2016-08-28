@@ -20,7 +20,6 @@ app.use(favicon(global.__root + '/client/resources/images/general/favicon.ico'))
 
 // Middlewares & config
 require(path.join(global.__root + '/server/routers/router.js'))(app);
-app.use('/partials', express.static(global.__root + '/client/views/partials'));
 app.use('/angular', express.static(global.__root + '/client/angular'));
 app.use('/resources', express.static(global.__root + '/client/resources'));
 app.set('port', process.env.PORT);

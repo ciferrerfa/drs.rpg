@@ -12,11 +12,15 @@ exports.login = function(req, res) {
 		.catch(connectionError);
 	
 	function connectionOpen (database) {
-		var model = require(path.join(global.__root + '/server/models/account.js'));
+		var account = require(path.join(global.__root + '/server/models/account.js'));
+		var role = require(path.join(global.__root + '/server/models/role.js'));
+		var language = require(path.join(global.__root + '/server/models/language.js'));
 		
-		model.initialize(database);
+		account.initialize(database);
+		role.initialize(database);
+		language.initialize(database);
 		
-		login(model, req.body.userId, req.body.password)
+		login(account, req.body.userId, req.body.password)
 			.then(loginOk)
 			.catch(loginError);
 			
@@ -95,7 +99,7 @@ exports.singup = function(req, res) {
 			roles.push(result[1]);
 			roles.push(result[2]);
 			
-			model.add(req.body.userId, req.body.password, req.body.email, result[0], roles)
+			model.add(req.body.userId, req.body.password, req.body.email, result[0], result[1], roles)
 				.then(addOk)
 				.catch(addError);
 			

@@ -8,8 +8,9 @@ var schema = new mongoose.Schema({
 	userId: {type: String, trim: true, index: true, unique: true},
 	password: {type: String},
 	email: {type: String, trim: true},
-	language: {type: mongoose.Schema.Types.ObjectId, ref: 'language'}, 
-	roles: [{role: {type: mongoose.Schema.Types.ObjectId, ref: 'role'}}]
+	language: {type: mongoose.Schema.Types.ObjectId, ref: 'language'},
+	role: {type: mongoose.Schema.Types.ObjectId, ref: 'role'}, 
+	roles: [{type: mongoose.Schema.Types.ObjectId, ref: 'role'}]
 });
 
 function getByUserId (userId) {
@@ -23,10 +24,14 @@ function getByUserIdPassword(userId, password) {
 		userId: new RegExp('^' + userId + '$', 'i'), 
 		password: new RegExp('^' + password + '$', 'i')
 	})
-	//.populate([{path:'language', select:'language'}, {path:'role', select:'roles'}]);
+	.populate([
+		{ path: 'language', model: 'language'},
+		{ path: 'role', model: 'role'},
+		{ path: 'roles', model: 'role'}
+	]);
 }
 
-exports.add = function (userId, password, email, language, roles) {
+exports.add = function (userId, password, email, language, role, roles) {
 	return new promise(function (resolve, reject) {
 		getByUserId(userId)
 			.then(findOk)
@@ -34,8 +39,7 @@ exports.add = function (userId, password, email, language, roles) {
 		
 		function findOk (result) {
 			if (result == null) {
-				console.log('adding ' + userId);
-				var newModel = new model({userId : userId, password: password, email: email, language: language, roles: roles});
+				var newModel = new model({userId : userId, password: password, email: email, language: language, role: role, roles: roles});
 				newModel.save()
 					.then(saveOk)
 					.catch(saveError);
@@ -68,7 +72,7 @@ exports.initialize = function(database) {
 
 exports.login = function (userId, password) {
 	return new promise(function (resolve, reject) {
-		getByUserIdPassword(userId)
+		getByUserIdPassword(userId, password)
 			.then(findOk)
 			.catch(findError);
 		
@@ -102,7 +106,7 @@ exports.setLanguage = function (userId, language) {
 		}
 		
 		function saveOk (result) {
-			resolve(result);
+			resolve(language);
 		}
 		
 		function saveError (err) {
