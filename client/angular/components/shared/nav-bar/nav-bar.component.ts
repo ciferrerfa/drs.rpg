@@ -17,7 +17,6 @@ import { Language }						from '../index.barrel';
 export class NavBarComponent implements OnInit {
 	
 	private errorMessage:	string		= '';
-	private language:		Language	= { _id: '', code: 'es-ca', name: '', __v:0 };
 	private languages:		Language[]	= [];
 	
 	constructor (
@@ -31,9 +30,10 @@ export class NavBarComponent implements OnInit {
 	
 	changeLanguage (language) {
 		
-		this.api.setAccountLanguage(language);
-		this.session.setLanguage(language);
-		this.language = this.session.getLanguage();
+		if (this.session.isAuthenticated()) {
+			this.api.setAccountLanguage(this.session.getToken(), language);
+		}
+		this.session.setLanguage(language, true);
 	}
 	
 	getUserId () : string {
@@ -59,7 +59,7 @@ export class NavBarComponent implements OnInit {
 	
 	private getLanguages () {
 		
-		this.api.getLanguages()
+		this.api.getLanguages(this.session.getToken())
 			.then(languages => this.setLanguages(languages))
 			.catch(this.handleError);
 	}
@@ -67,14 +67,6 @@ export class NavBarComponent implements OnInit {
 	private setLanguages (languages: Language[]) {
 		
 		this.languages = languages;
-		this.setLanguage(languages[0]);
-	}
-	
-	private setLanguage (language: Language) {
-		
-		this.language = (this.session.isAuthenticated())
-			? this.session.getLanguage()
-				: language;
 	}
 	
 }

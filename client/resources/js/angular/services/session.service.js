@@ -21,20 +21,23 @@ let SessionService = class SessionService {
     }
     getAccount() {
         return (!!localStorage.getItem(Storage.account))
-            ? undefined
-            : JSON.parse(localStorage.getItem(Storage.account));
+            ? JSON.parse(localStorage.getItem(Storage.account))
+            : undefined;
     }
     setAccount(account) {
         localStorage.removeItem(Storage.account);
         if (account != undefined) {
             localStorage.setItem(Storage.account, JSON.stringify(account));
+            this.setLanguage(account.language, false);
         }
     }
-    setLanguage(language) {
-        if (this.isAuthenticated()) {
-            var account = this.getAccount();
-            account.language = language;
-            this.setAccount(account);
+    setLanguage(language, modifyAccount) {
+        if (modifyAccount) {
+            if (this.isAuthenticated()) {
+                var account = this.getAccount();
+                account.language = language;
+                this.setAccount(account);
+            }
         }
         sessionStorage.removeItem(Storage.language);
         if (language != undefined) {
@@ -43,13 +46,13 @@ let SessionService = class SessionService {
     }
     getLanguage() {
         return (!!sessionStorage.getItem(Storage.language))
-            ? { _id: '', code: 'es-ca', name: '', __v: 0 }
-            : JSON.parse(sessionStorage.getItem(Storage.language));
+            ? JSON.parse(sessionStorage.getItem(Storage.language))
+            : { _id: '', code: 'es-ca', name: '', __v: 0 };
     }
     getToken() {
         return (!!localStorage.getItem(Storage.token))
-            ? ''
-            : localStorage.getItem(Storage.token);
+            ? localStorage.getItem(Storage.token)
+            : '';
     }
     setToken(token) {
         localStorage.removeItem(Storage.token);

@@ -1,9 +1,10 @@
-import 'rxjs/add/operator/toPromise';import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/toPromise';
 
 import { Injectable }				from '@angular/core';
 import { Http, Headers, Response }	from '@angular/http';
 import { Observable }				from 'rxjs/Rx'; //'rxjs/Observable';
 
+import { EndPoint }					from './http-client.service';
 import { Account }					from '../models/account.model';
 
 //{auth: false, data: 'errordatabase', token: null}
@@ -16,12 +17,40 @@ export class Auth {
 @Injectable()
 export class AuthenticationService {
 	
-	private loginEndPoint : string = '/authentication/login'; 
-	private logoutEndPoint : string = '/authentication/logout';
-	private singupEndPoint : string = '/authentication/singup';
-	
 	constructor (
 		private http: Http) { }
+	
+	login (userId: string, password: string): Promise<Auth> {
+		
+		var params = JSON.stringify({userId: userId, password: password});
+		
+		return this.httpPost(EndPoint.login, params, this.getHeaders(''));
+	}
+	
+	logout (token: string) {
+		
+		var params = JSON.stringify({ });
+		
+		return this.httpPost(EndPoint.logout, params, this.getHeaders(token));
+	}
+	
+	singup (userId: string, password: string, email: string): Promise<Auth> {
+		
+		var params = JSON.stringify({userId: userId, password: password, email: email});
+		
+		return this.httpPost(EndPoint.singup, params, this.getHeaders(''));
+	}
+	
+	private getHeaders(token: string): {} {
+		
+		var headers = new Headers();
+		
+		headers.append('Content-Type', 'application/json');
+		
+		if (token != '') { headers.append('x-security-token', token); }
+		
+		return { headers: headers };
+	}
 	
 	private handleError (error: any): Promise<any> {
 		
@@ -35,30 +64,6 @@ export class AuthenticationService {
 			.toPromise()
 			.then(response => response.json() as Auth)
 			.catch(this.handleError);
-	}
-	
-	login (userId: string, password: string): Promise<Auth> {
-		
-		var params = JSON.stringify({userId: userId, password: password});
-		var headers = { headers: new Headers({'Content-Type': 'application/json'}) };
-		
-		return this.httpPost(this.loginEndPoint, params, headers);
-	}
-	
-	logout (token: string) {
-		
-		var params = JSON.stringify({ });
-		var headers = { headers: new Headers({'x-security-token': token}) };
-		
-		return this.httpPost(this.logoutEndPoint, params, headers);
-	}
-	
-	singup (userId: string, password: string, email: string): Promise<Auth> {
-		
-		var params = JSON.stringify({userId: userId, password: password, email: email});
-		var headers = { headers: new Headers({'Content-Type': 'application/json'}) };
-		
-		return this.httpPost(this.singupEndPoint, params, headers);
 	}
 	
 }

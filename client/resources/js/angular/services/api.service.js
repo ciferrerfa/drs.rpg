@@ -16,27 +16,31 @@ let ApiService = class ApiService {
     constructor(http) {
         this.http = http;
     }
+    getLanguages(token) {
+        return this.http.get(http_client_service_1.EndPoint.language, this.getHeaders('', token))
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
+    setAccountLanguage(token, language) {
+        return this.http.put(http_client_service_1.EndPoint.account + '/language', JSON.stringify({ params: language }), this.getHeaders('application/json', token))
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
+    getHeaders(contentType, token) {
+        var headers = new http_1.Headers();
+        if (contentType != '') {
+            headers.append('Content-Type', contentType);
+        }
+        if (token != '') {
+            headers.append('x-security-token', token);
+        }
+        return new http_1.RequestOptions({ headers: headers });
+    }
     handleError(error) {
         console.log('An error occurred: ' + error);
         return Promise.reject(error.message || error);
-    }
-    getLanguages() {
-        return this.http.get(http_client_service_1.EndPoint.language)
-            .toPromise()
-            .then(response => response.json().data)
-            .catch(this.handleError);
-    }
-    getLanguage(code) {
-        return this.http.get(http_client_service_1.EndPoint.language)
-            .toPromise()
-            .then(response => response.json().data)
-            .catch(this.handleError);
-    }
-    setAccountLanguage(language) {
-        return this.http.put(http_client_service_1.EndPoint.account + '/language', JSON.stringify(language))
-            .toPromise()
-            .then(response => response.json().data)
-            .catch(this.handleError);
     }
 };
 ApiService = __decorate([

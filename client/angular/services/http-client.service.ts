@@ -2,11 +2,17 @@
 //import { Injectable }		from '@angular/core';
 
 export class EndPoint {
+	//auth
+	public static get login():	string { return '/authentication/login'; }
+	public static get logout():	string { return '/authentication/logout'; }
+	public static get singup():	string { return '/authentication/singup'; }
+	
+	//api
 	public static get language():	string { return '/api/language'; }
 	public static get role():		string { return '/api/role'; }
 	public static get account():	string { return '/api/account'; }
 }
- 
+	
 /*
 @Injectable()
 export class HttpClient {

@@ -6,7 +6,7 @@ var moment  = require('moment');
 exports.createToken = function (account) {
   
   var payLoad = {
-    sub: account._id,
+    sub: account.userId,
     iat: moment().unix(),
     exp: moment().add(14, "days").unix()
   };

@@ -15,7 +15,7 @@ exports.setLanguage = function(req, res) {
 		
 		model.initialize(database);
 		
-		model.setLanguage('admin', req.params.language)
+		model.setLanguage(req.params.userId, req.body.params)
 			.then(findOk)
 			.catch(findError);
 		

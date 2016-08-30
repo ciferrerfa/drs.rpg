@@ -16,16 +16,16 @@ let NavBarComponent = class NavBarComponent {
         this.api = api;
         this.session = session;
         this.errorMessage = '';
-        this.language = { _id: '', code: 'es-ca', name: '', __v: 0 };
         this.languages = [];
     }
     ngOnInit() {
         this.getLanguages();
     }
     changeLanguage(language) {
-        this.api.setAccountLanguage(language);
-        this.session.setLanguage(language);
-        this.language = this.session.getLanguage();
+        if (this.session.isAuthenticated()) {
+            this.api.setAccountLanguage(this.session.getToken(), language);
+        }
+        this.session.setLanguage(language, true);
     }
     getUserId() {
         return (this.session.getAccount() != undefined)
@@ -42,18 +42,12 @@ let NavBarComponent = class NavBarComponent {
         this.session.logout();
     }
     getLanguages() {
-        this.api.getLanguages()
+        this.api.getLanguages(this.session.getToken())
             .then(languages => this.setLanguages(languages))
             .catch(this.handleError);
     }
     setLanguages(languages) {
         this.languages = languages;
-        this.setLanguage(languages[0]);
-    }
-    setLanguage(language) {
-        this.language = (this.session.isAuthenticated())
-            ? this.session.getLanguage()
-            : language;
     }
 };
 NavBarComponent = __decorate([

@@ -9,18 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 require('rxjs/add/operator/toPromise');
-require('rxjs/add/operator/toPromise');
 const core_1 = require('@angular/core');
 const http_1 = require('@angular/http');
+const http_client_service_1 = require('./http-client.service');
 class Auth {
 }
 exports.Auth = Auth;
 let AuthenticationService = class AuthenticationService {
     constructor(http) {
         this.http = http;
-        this.loginEndPoint = '/authentication/login';
-        this.logoutEndPoint = '/authentication/logout';
-        this.singupEndPoint = '/authentication/singup';
+    }
+    login(userId, password) {
+        var params = JSON.stringify({ userId: userId, password: password });
+        return this.httpPost(http_client_service_1.EndPoint.login, params, this.getHeaders(''));
+    }
+    logout(token) {
+        var params = JSON.stringify({});
+        return this.httpPost(http_client_service_1.EndPoint.logout, params, this.getHeaders(token));
+    }
+    singup(userId, password, email) {
+        var params = JSON.stringify({ userId: userId, password: password, email: email });
+        return this.httpPost(http_client_service_1.EndPoint.singup, params, this.getHeaders(''));
+    }
+    getHeaders(token) {
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        if (token != '') {
+            headers.append('x-security-token', token);
+        }
+        return { headers: headers };
     }
     handleError(error) {
         console.log('An error occurred ' + error);
@@ -31,21 +48,6 @@ let AuthenticationService = class AuthenticationService {
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
-    }
-    login(userId, password) {
-        var params = JSON.stringify({ userId: userId, password: password });
-        var headers = { headers: new http_1.Headers({ 'Content-Type': 'application/json' }) };
-        return this.httpPost(this.loginEndPoint, params, headers);
-    }
-    logout(token) {
-        var params = JSON.stringify({});
-        var headers = { headers: new http_1.Headers({ 'x-security-token': token }) };
-        return this.httpPost(this.logoutEndPoint, params, headers);
-    }
-    singup(userId, password, email) {
-        var params = JSON.stringify({ userId: userId, password: password, email: email });
-        var headers = { headers: new http_1.Headers({ 'Content-Type': 'application/json' }) };
-        return this.httpPost(this.singupEndPoint, params, headers);
     }
 };
 AuthenticationService = __decorate([

@@ -23,8 +23,8 @@ export class SessionService {
 	getAccount () : Account {
 		
 		return (!!localStorage.getItem(Storage.account))
-			? undefined
-				: JSON.parse(localStorage.getItem(Storage.account));
+			? JSON.parse(localStorage.getItem(Storage.account))
+				: undefined;
 	}
 	
 	private setAccount (account: Account) {
@@ -33,15 +33,18 @@ export class SessionService {
 		
 		if (account != undefined) {
 			localStorage.setItem(Storage.account, JSON.stringify(account));
+			this.setLanguage(account.language, false);
 		}
 	}
 	
-	setLanguage (language) {
+	setLanguage (language, modifyAccount) {
 		
-		if (this.isAuthenticated()) {
-			var account = this.getAccount();
-			account.language = language;
-			this.setAccount(account); 
+		if (modifyAccount) {
+			if (this.isAuthenticated()) {
+				var account = this.getAccount();
+				account.language = language;
+				this.setAccount(account); 
+			}
 		}
 		
 		sessionStorage.removeItem(Storage.language);
@@ -54,15 +57,15 @@ export class SessionService {
 	getLanguage () : Language {
 		
 		return (!!sessionStorage.getItem(Storage.language))
-			? { _id: '', code: 'es-ca', name: '', __v:0 }
-				: JSON.parse(sessionStorage.getItem(Storage.language));
+			? JSON.parse(sessionStorage.getItem(Storage.language))
+				: { _id: '', code: 'es-ca', name: '', __v:0 };
 	}
 	
-	private getToken () : string {
+	getToken () : string {
 		
 		return (!!localStorage.getItem(Storage.token))
-			? ''
-				: localStorage.getItem(Storage.token);
+			? localStorage.getItem(Storage.token)
+				: '';
 	}
 	
 	private setToken (token: string) {

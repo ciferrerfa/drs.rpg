@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/toPromise';
 
 import { Injectable }			from '@angular/core';
-import { Response, Http, Headers }				from '@angular/http';
+import { Response, Http, Headers, RequestOptions }				from '@angular/http';
 import { Observable }			from 'rxjs/Rx'; //'rxjs/Observable';
 
 import { EndPoint }				from './http-client.service';
@@ -14,20 +14,38 @@ export class ApiService {
 	constructor(
 		private http: Http) { }
 	
-	//constructor(private http: HttpClient) { }
+	getLanguages(token: string): Promise<Language[]> {
+		
+		return this.http.get(EndPoint.language, this.getHeaders('', token))
+			.toPromise()
+			.then(response => response.json().data as Language[])
+			.catch(this.handleError);
+	}
+	
+	setAccountLanguage(token: string, language: Language): Promise<Language> {
+		return this.http.put(EndPoint.account + '/language', JSON.stringify({ params: language }), this.getHeaders('application/json', token))
+			.toPromise()
+			.then(response => response.json().data as Language)
+			.catch(this.handleError); 
+	}
+	
+	private getHeaders(contentType: string, token: string): RequestOptions {
+		
+		var headers = new Headers();
+		
+		if (contentType != '') { headers.append('Content-Type', contentType); }
+		
+		if (token != '') { headers.append('x-security-token', token); }
+		
+		return new RequestOptions({ headers: headers });
+	}
 	
 	private handleError(error: any): Promise<any> {
 		console.log('An error occurred: ' + error);
 		return Promise.reject(error.message || error);
 	}
 	
-	getLanguages(): Promise<Language[]> {
-		return this.http.get(EndPoint.language)
-			.toPromise()
-			.then(response => response.json().data as Language[])
-			.catch(this.handleError);
-	}
-	
+	/*
 	getLanguage(code: string): Promise<Language> {
 		return this.http.get(EndPoint.language)
 			.toPromise()
@@ -35,14 +53,6 @@ export class ApiService {
 			.catch(this.handleError);
 	}
 	
-	setAccountLanguage(language: Language): Promise<Language> {
-		return this.http.put(EndPoint.account + '/language', JSON.stringify(language))
-			.toPromise()
-			.then(response => response.json().data as Language)
-			.catch(this.handleError); 
-	}
-	
-	/*
 	private extractData(res: Response) {
 		let body = res.json();
 		return body.data || { };
