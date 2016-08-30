@@ -49,6 +49,13 @@ let SessionService = class SessionService {
             ? JSON.parse(sessionStorage.getItem(Storage.language))
             : { _id: '', code: 'es-ca', name: '', __v: 0 };
     }
+    setRole(role) {
+        if (this.isAuthenticated()) {
+            var account = this.getAccount();
+            account.role = role;
+            this.setAccount(account);
+        }
+    }
     getToken() {
         return (!!localStorage.getItem(Storage.token))
             ? localStorage.getItem(Storage.token)

@@ -27,9 +27,20 @@ let NavBarComponent = class NavBarComponent {
         }
         this.session.setLanguage(language, true);
     }
+    changeRole(role) {
+        if (this.session.isAuthenticated()) {
+            this.api.setAccountRole(this.session.getToken(), role);
+        }
+        this.session.setRole(role);
+    }
     getUserId() {
         return (this.session.getAccount() != undefined)
             ? this.session.getAccount().userId
+            : '';
+    }
+    getUserRole() {
+        return (this.session.getAccount() != undefined)
+            ? this.session.getAccount().role.name
             : '';
     }
     handleError(error) {

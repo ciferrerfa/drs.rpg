@@ -28,6 +28,12 @@ let ApiService = class ApiService {
             .then(response => response.json().data)
             .catch(this.handleError);
     }
+    setAccountRole(token, role) {
+        return this.http.put(http_client_service_1.EndPoint.account + '/role', JSON.stringify({ params: role }), this.getHeaders('application/json', token))
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
     getHeaders(contentType, token) {
         var headers = new http_1.Headers();
         if (contentType != '') {

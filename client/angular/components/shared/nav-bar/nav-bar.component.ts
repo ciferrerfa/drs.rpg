@@ -3,7 +3,6 @@ import 'rxjs/Rx';
 import { Component, OnInit }			from '@angular/core';
 
 import { ApiService, SessionService }	from '../index.barrel';
-
 import { Language }						from '../index.barrel';
 
 @Component({
@@ -36,10 +35,25 @@ export class NavBarComponent implements OnInit {
 		this.session.setLanguage(language, true);
 	}
 	
+	changeRole (role) {
+		
+		if (this.session.isAuthenticated()) {
+			this.api.setAccountRole(this.session.getToken(), role);
+		}
+		this.session.setRole(role);
+	}
+	
 	getUserId () : string {
 		
 		return (this.session.getAccount() != undefined)
 			? this.session.getAccount().userId
+				: '';
+	}
+	
+	getUserRole () : string {
+		
+		return (this.session.getAccount() != undefined)
+			? this.session.getAccount().role.name
 				: '';
 	}
 	

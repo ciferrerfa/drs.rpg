@@ -29,6 +29,13 @@ export class ApiService {
 			.catch(this.handleError); 
 	}
 	
+	setAccountRole(token: string, role: Role): Promise<Role> {
+		return this.http.put(EndPoint.account + '/role', JSON.stringify({ params: role }), this.getHeaders('application/json', token))
+			.toPromise()
+			.then(response => response.json().data as Role)
+			.catch(this.handleError); 
+	}
+	
 	private getHeaders(contentType: string, token: string): RequestOptions {
 		
 		var headers = new Headers();

@@ -61,6 +61,14 @@ export class SessionService {
 				: { _id: '', code: 'es-ca', name: '', __v:0 };
 	}
 	
+	setRole (role) {
+		if (this.isAuthenticated()) {
+			var account = this.getAccount();
+			account.role = role;
+			this.setAccount(account); 
+		}
+	}
+	
 	getToken () : string {
 		
 		return (!!localStorage.getItem(Storage.token))

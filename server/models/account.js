@@ -118,3 +118,36 @@ exports.setLanguage = function (userId, language) {
 		}
 	});
 };
+
+exports.setRole = function (userId, role) {
+	return new promise(function (resolve, reject) {
+		getByUserId(userId)
+			.then(findOk)
+			.catch(findError);
+		
+		function findOk (account) {
+			if (account != null) {
+				account.role = role;
+				
+				account.save()
+					.then(saveOk)
+					.catch(saveError);
+			}
+			else {
+				reject(new Error('User: ' + userId + ' not exists'));
+			}
+		}
+		
+		function saveOk (result) {
+			resolve(role);
+		}
+		
+		function saveError (err) {
+			reject(new Error('Save error: ' + err));
+		}
+		
+		function findError (err) {
+			reject(new Error('Find error: ' + err));
+		}
+	});
+};

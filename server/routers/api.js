@@ -16,7 +16,8 @@ router
     .get('/language/:code', function(req, res) { languageController.getByCode(req, res); })
     .get('/role', authentication.ensureAuthenticated, function(req, res) { roleController.getAll(req, res); })
     .get('/role/:name', authentication.ensureAuthenticated, function(req, res) { roleController.getByName(req, res); })
-    .put('/account/language', authentication.ensureAuthenticated, function(req, res) { accountController.setLanguage(req, res); });
+    .put('/account/language', authentication.ensureAuthenticated, function(req, res) { accountController.setLanguage(req, res); })
+    .put('/account/role', authentication.ensureAuthenticated, function(req, res) { accountController.setRole(req, res); });
     //.get('/profile', authentication.ensureAuthenticated, function(req, res) { profileController.getProfile(req, res); })
     //.put('/profile', authentication.ensureAuthenticated, function(req, res) { profileController.updateProfile(req, res); })
     //.put('/profile/:languageId', authentication.ensureAuthenticated, function(req, res) { profileController.updateLanguage(req, res); });

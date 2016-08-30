@@ -8,6 +8,7 @@ export class Account {
 	password:	string;
 	mail:		string;
 	language:	Language;
+	role:		Role;
 	roles:		Role[];
 	__v:		number;
 	
