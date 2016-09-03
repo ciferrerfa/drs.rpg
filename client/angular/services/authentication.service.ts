@@ -5,7 +5,7 @@ import { Http, Headers, Response }	from '@angular/http';
 import { Observable }				from 'rxjs/Rx'; //'rxjs/Observable';
 
 import { EndPoint }					from './http-client.service';
-import { Account }					from '../models/account.model';
+import { Language }					from '../models/language.model';
 
 //{auth: false, data: 'errordatabase', token: null}
 export class Auth {
@@ -20,32 +20,33 @@ export class AuthenticationService {
 	constructor (
 		private http: Http) { }
 	
-	login (userId: string, password: string): Promise<Auth> {
+	login (language: Language, userId: string, password: string): Promise<Auth> {
 		
 		var params = JSON.stringify({userId: userId, password: password});
 		
-		return this.httpPost(EndPoint.login, params, this.getHeaders(''));
+		return this.httpPost(EndPoint.login, params, this.getHeaders(language, ''));
 	}
 	
-	logout (token: string) {
+	logout (language: Language, token: string) {
 		
 		var params = JSON.stringify({ });
 		
-		return this.httpPost(EndPoint.logout, params, this.getHeaders(token));
+		return this.httpPost(EndPoint.logout, params, this.getHeaders(language, token));
 	}
 	
-	singup (userId: string, password: string, email: string): Promise<Auth> {
+	singup (language: Language, userId: string, password: string, email: string): Promise<Auth> {
 		
 		var params = JSON.stringify({userId: userId, password: password, email: email});
 		
-		return this.httpPost(EndPoint.singup, params, this.getHeaders(''));
+		return this.httpPost(EndPoint.singup, params, this.getHeaders(language, ''));
 	}
 	
-	private getHeaders(token: string): {} {
+	private getHeaders(language: Language, token: string): {} {
 		
 		var headers = new Headers();
 		
-		headers.append('Content-Type', 'application/json');
+		headers.append('content-type', 'application/json');
+		headers.append('content-language', (language==undefined) ? 'ca-es' : language.code);
 		
 		if (token != '') { headers.append('x-security-token', token); }
 		

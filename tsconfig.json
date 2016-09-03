@@ -13,7 +13,7 @@
 		"outDir": "client/resources/js/angular"
 	},
 	"exclude": [
-		".c9", ".data", ".git", "node_modules", "server", "typings",
+		".c9", ".data", ".git", "node_modules", "server", "typings", ".old", ".tests",
 		"client/resources/modules", "node_modules/@angular", "node_modules/rxjs"
 	]
 }

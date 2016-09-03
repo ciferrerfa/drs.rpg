@@ -1,0 +1,5 @@
+- on singup -> repetir entrada password
+- cerca un toast
+- mobile
+-   on select language menu are colsed (OK) 
+-   on select role menu are not closed (KO)

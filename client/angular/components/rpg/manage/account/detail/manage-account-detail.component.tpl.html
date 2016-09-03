@@ -1,0 +1,15 @@
+Manage - Account - Detail
+
+<h2>Account</h2>
+  <div *ngIf="account">
+    <h3>"{{account.userId}}"</h3>
+    <div>
+      <label>Id: </label>{{account._id}}</div>
+    <div>
+      <label>UserId: </label>
+      <input [(ngModel)]="account.userId" placeholder="userId"/>
+    </div>
+    <p>
+      <button (click)="gotoAccounts()">Back</button>
+    </p>
+  </div>

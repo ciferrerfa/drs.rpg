@@ -1,0 +1,32 @@
+{
+	"server": {
+		
+		"databaseerror":	"db error",
+		"loginerror":		"Compruebe su contraseña o el identificador de usuario.",
+		"singupexists":		"El identificador de usuario ya existe.",
+		"singuperror":		"Error al insertar datos."
+	},
+	
+	"nav-bar": {
+		"singup": "Regístrate",
+		"login": "Iniciar sesión",
+		"logout": "Cerrar sesión",
+		"manage": "Gestionar"
+	},
+	
+	"login": {
+		"frm-title": "Iniciar sesión",
+		"lbl-userid": "Identificador de usuario",
+		"lbl-password": "Contraseña",
+		"btn-submit": "Iniciar sesión"
+	},
+	
+	"singup": {
+		"frm-title": "Regístrate",
+		"lbl-email": "Correo electrónico",
+		"lbl-userid": "Identificador de usuario",
+		"lbl-password": "Contraseña",
+		"btn-submit": "Regístrate"
+	}
+	
+}

@@ -1,0 +1,9 @@
+Manage - Account - List
+
+  <h2>Accounts</h2>
+  <ul class="items">
+    <li *ngFor="let account of accounts"
+      (click)="onSelect(account)">
+      <span class="badge">{{ account.Userid }}</span> {{ account.email }}
+    </li>
+  </ul>

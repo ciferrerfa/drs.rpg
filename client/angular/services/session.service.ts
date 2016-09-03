@@ -92,7 +92,7 @@ export class SessionService {
 	
 	login (userId: string, password: string): Promise<Auth> {
 		
-		return this.auth.login(userId, password)
+		return this.auth.login(this.getLanguage(), userId, password)
 			.then(response => this.resolveLogin(response));
 	}
 	
@@ -108,7 +108,7 @@ export class SessionService {
 	
 	logout () {
 		
-		this.auth.logout(this.getToken())
+		this.auth.logout(this.getLanguage(), this.getToken())
 			.then(response => this.resolveLogout(response));
 	}
 	
@@ -122,7 +122,7 @@ export class SessionService {
 	
 	singup (userId: string, password: string, email: string): Promise<Auth> {
 		
-		return this.auth.singup(userId, password, email)
+		return this.auth.singup(this.getLanguage(), userId, password, email)
 			.then(response => this.resolveSingup(response));
 	}
 	

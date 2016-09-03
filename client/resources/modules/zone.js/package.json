@@ -1,6 +1,6 @@
 {
   "name": "zone.js",
-  "version": "0.6.15",
+  "version": "0.6.17",
   "description": "Zones for JavaScript",
   "main": "dist/zone-node.js",
   "browser": "dist/zone.js",
@@ -58,11 +58,11 @@
     "typings": "^0.7.12",
     "webpack": "^1.12.2"
   },
-  "gitHead": "02a41c0a04f1cdd032915448652cf2dd48893fbc",
+  "gitHead": "f57fc1870bfbbe36566d2f6acfa435fea63617d4",
   "homepage": "https://github.com/angular/zone.js#readme",
-  "_id": "zone.js@0.6.15",
-  "_shasum": "e30be380c89dc8de3f70b7f599bb55882e6fd328",
-  "_from": "zone.js@>=0.6.12 <0.7.0",
+  "_id": "zone.js@0.6.17",
+  "_shasum": "65ecd9b4330026911416250cb1b716472e3cbd62",
+  "_from": "zone.js@*",
   "_npmVersion": "3.7.3",
   "_nodeVersion": "5.5.0",
   "_npmUser": {
@@ -70,8 +70,8 @@
     "email": "angular-core+npm@google.com"
   },
   "dist": {
-    "shasum": "e30be380c89dc8de3f70b7f599bb55882e6fd328",
-    "tarball": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.15.tgz"
+    "shasum": "65ecd9b4330026911416250cb1b716472e3cbd62",
+    "tarball": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.17.tgz"
   },
   "maintainers": [
     {
@@ -85,8 +85,8 @@
   ],
   "_npmOperationalInternal": {
     "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/zone.js-0.6.15.tgz_1471627240048_0.9166294175665826"
+    "tmp": "tmp/zone.js-0.6.17.tgz_1471905710093_0.10680312826298177"
   },
-  "_resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.15.tgz",
+  "_resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.17.tgz",
   "readme": "ERROR: No README data found!"
 }

@@ -1,0 +1,32 @@
+{
+	"server": {
+		
+		"databaseerror":	"db error",
+		"loginerror":		"Check your password or user id.",
+		"singupexists":		"The user id already exists.",
+		"singuperror":		"Failed to insert data."
+	},
+	
+	"nav-bar": {
+		"singup": "Sing up",
+		"login": "Sing in",
+		"logout": "Sing out",
+		"manage": "Manage"
+	},
+	
+	"login": {
+		"frm-title": "Sing in",
+		"lbl-userid": "User id",
+		"lbl-password": "Password",
+		"btn-submit": "Sing in"
+	},
+	
+	"singup": {
+		"frm-title": "Sing up",
+		"lbl-email": "Email",
+		"lbl-userid": "User id",
+		"lbl-password": "Password",
+		"btn-submit": "Sing up"
+	}
+	
+}

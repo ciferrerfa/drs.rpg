@@ -1,10 +1,12 @@
-import { Component, EventEmitter }			from '@angular/core';
-import { OnInit, Output, Input }			from '@angular/core';
-import { FORM_DIRECTIVES, FormBuilder }		from '@angular/common';
-import { Validators, ControlGroup, NgIf }	from '@angular/common';
-import { Router }							from '@angular/router';
+import { Component, EventEmitter }					from '@angular/core';
+import { OnInit, Output, Input }					from '@angular/core';
+import { FORM_DIRECTIVES, FormBuilder, Validators }	from '@angular/common';
+import { ControlGroup, NgIf }						from '@angular/common';
+import { Router }									from '@angular/router';
+import { TranslateService }							from 'ng2-translate/ng2-translate';
 
-import { SessionService }					from '../index.barrel';
+import { Auth }						from '../index.barrel';
+import { SessionService }							from '../../../services/session.service';
 
 @Component({
 	selector:   'rpg-login',
@@ -18,11 +20,12 @@ import { SessionService }					from '../index.barrel';
 export class LoginComponent implements OnInit {
 	
 	private form:	ControlGroup;
-	private error:	boolean			= false;
+	private error:	string;
 	
 	constructor(
 		private fb:			FormBuilder, 
 		private session:	SessionService,
+		private translate:	TranslateService,
 		private router:		Router) { }
 	
 	ngOnInit() {
@@ -33,17 +36,22 @@ export class LoginComponent implements OnInit {
 	}
 	
 	onSubmit(value: any) {
+		this.error = '';
 		this.session.login(value.userId, value.password)
-			.then(data => this.resolveLogin());
+			.then(data => this.resolveLogin(data));
 	}
 	
-	private resolveLogin() {
+	private resolveLogin(data: Auth) {
 		if (this.session.isAuthenticated()) {
-			this.router.navigate(['../profile'])
+			this.router.navigate(['/home']);
 		}
 		else {
-			this.error = true;
+			this.translate.get(data.data).subscribe((res: string) => {
+				this.error = res;
+			});
 		}
+		
+		return data;
 	}
  
 }

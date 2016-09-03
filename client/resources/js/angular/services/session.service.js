@@ -71,7 +71,7 @@ let SessionService = class SessionService {
         return !!localStorage.getItem(Storage.token);
     }
     login(userId, password) {
-        return this.auth.login(userId, password)
+        return this.auth.login(this.getLanguage(), userId, password)
             .then(response => this.resolveLogin(response));
     }
     resolveLogin(result) {
@@ -82,7 +82,7 @@ let SessionService = class SessionService {
         return result;
     }
     logout() {
-        this.auth.logout(this.getToken())
+        this.auth.logout(this.getLanguage(), this.getToken())
             .then(response => this.resolveLogout(response));
     }
     resolveLogout(result) {
@@ -92,7 +92,7 @@ let SessionService = class SessionService {
         }
     }
     singup(userId, password, email) {
-        return this.auth.singup(userId, password, email)
+        return this.auth.singup(this.getLanguage(), userId, password, email)
             .then(response => this.resolveSingup(response));
     }
     resolveSingup(result) {

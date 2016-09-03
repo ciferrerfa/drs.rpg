@@ -1,0 +1,7 @@
+Admin Home
+
+<a routerLink='./account/{{ session.getAccount().userId }}' routerLinkActive='active'>profile</a>
+<a routerLink='./account' routerLinkActive='active'>accounts</a>
+OUT
+<router-outlet name="manage">IN</router-outlet>
+OUT

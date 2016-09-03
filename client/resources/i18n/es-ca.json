@@ -1,0 +1,32 @@
+{
+	"server": {
+		
+		"databaseerror":	"db error",
+		"loginerror":		"Comproveu la contrasenya o l'identificador d'usuari.",
+		"singupexists":		"L'identificador d'usuari ja existeix.",
+		"singuperror":		"Error en inserir dades."
+	},
+	
+	"nav-bar": {
+		"singup": "Registrat",
+		"login": "Iniciar sessió",
+		"logout": "Tancar sessió",
+		"manage": "Gestionar"
+	},
+	
+	"login": {
+		"frm-title": "Iniciar sessió",
+		"lbl-userid": "Identificador d'usuari",
+		"lbl-password": "Contrasenya",
+		"btn-submit": "Iniciar sessió"
+	},
+	
+	"singup": {
+		"frm-title": "Registrat",
+		"lbl-email": "Correu electrònic",
+		"lbl-userid": "Identificador d'usuari",
+		"lbl-password": "Contrasenya",
+		"btn-submit": "Registrat"
+	}
+	
+}

@@ -42,7 +42,7 @@ exports.login = function(req, res) {
 			
 		function loginOk (account) {
 			if (account == null) {
-				res.json({auth: false, data: 'loginerror', token: null});
+				res.json({auth: false, data: 'server.loginerror', token: null});
 			}
 			else {
 				res.json({ auth: true, data: account, token: service.createToken(account) });
@@ -52,14 +52,14 @@ exports.login = function(req, res) {
 		
 		function loginError (err) {
 			console.log('Error login: ' + err);
-			res.json({auth: false, data: 'errorlogin', token: null});
+			res.json({auth: false, data: 'server.loginerror', token: null});
 			database.close();
 		}
 	}
 	
 	function connectionError (err) {
 		console.log('Error database: ' + err);
-		res.json({auth: false, data: 'errordatabase', token: null});
+		res.json({auth: false, data: 'server.errordatabase', token: null});
 	}
 	
 };
@@ -82,7 +82,7 @@ exports.singup = function(req, res) {
 		roleModel.initialize(database);
 		var promises		= [];
 		
-		promises.push(languageModel.getByCode(req.body.language));
+		promises.push(languageModel.getByCode(global.__language));
 		promises.push(roleModel.getByName('master'));
 		promises.push(roleModel.getByName('player'));
 		
@@ -92,7 +92,7 @@ exports.singup = function(req, res) {
 		
 		function getOk (result) {
 			var model	= require(path.join(global.__root + '/server/models/account.js'));
-			var roles			= [];
+			var roles	= [];
 			
 			model.initialize(database);
 			
@@ -104,32 +104,32 @@ exports.singup = function(req, res) {
 				.catch(addError);
 			
 			function addOk (account) {
-				if (account == null) {
+				if (account.userId != undefined) {
 					res.json({ auth: true, data: account, token: service.createToken(account) });
 				}
 				else {
-					res.json({auth: false, data: 'singupexists', token: null});
+					res.json({auth: false, data: 'server.singupexists', token: null});
 				}
 				database.close();
 			}
 			
 			function addError (err) {
 				console.log('Error singup.add: ' + err);
-				res.json({auth: false, data: 'error singup.add', token: null});
+				res.json({auth: false, data: 'server.singuperror', token: null});
 				database.close();
 			}
 		}
 		
 		function getError (err) {
 			console.log('Error singup.get: ' + err);
-			res.json({auth: false, data: 'error singup.get', token: null});
+			res.json({auth: false, data: 'server.singuperror', token: null});
 			database.close();
 		}
 	}
 	
 	function connectionError (err) {
 		console.log('Error database: ' + err);
-		res.json({auth: false, data: 'errordatabase', token: null});
+		res.json({auth: false, data: 'server.errordatabase', token: null});
 	}
 	
 };

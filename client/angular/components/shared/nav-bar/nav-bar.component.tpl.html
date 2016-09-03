@@ -7,29 +7,26 @@
 		<div class='collapse navbar-collapse' id='myNavbar'>
 			<ul class='nav navbar-nav'>
 				<li><a routerLink='/home' routerLinkActive='active'>Home</a></li>
-				<!--<li *ngIf='isAuthenticated()'><a routerLink='/profile' routerLinkActive='active'>{{ 'profile' | translate }}</a></li>-->
 				<li *ngIf='isAuthenticated()'><a routerLink='/profile' routerLinkActive='active'>profile</a></li>
+				<li *ngIf='isAuthenticated()'><a routerLink='/manage' routerLinkActive='active'>{{ 'nav-bar.manage' | translate }}</a></li>
 			</ul>
 			<ul class='nav navbar-nav navbar-right'>
 				<li class='dropdown' *ngIf='isAuthenticated()'>
-					<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>{{ this.session.getAccount().role.name }} <span class='caret'></span></a>
-					<ul class='dropdown-menu' role='menu'>
-						<li *ngFor='let role of this.session.getAccount().roles' (click)='changeRole(role)'><a role='button' aria-expanded='false' class='pull-right'>{{role.name}}</a></li>
+					<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'><span class='glyphicon glyphicon-credit-card'></span>&nbsp;&nbsp;&nbsp;{{ this.session.getAccount().role.name }}&nbsp;&nbsp;<span class='caret'></span></a>
+					<ul class='dropdown-menu col-xs-1' role='menu'>
+						<li *ngFor='let role of this.session.getAccount().roles' (click)='changeRole(role)'><a role='button' aria-expanded='false' class='pull-left'><span class='glyphicon glyphicon-credit-card'></span>&nbsp;&nbsp;&nbsp;{{ role.name }}</a></li>
 					</ul>
 				</li>
 				<li class='dropdown'>
-					<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'><img src='/resources/images/flags/{{ session.getLanguage().code }}.gif'> <span class='caret'></span></a>
+					<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'><img src='/resources/images/flags/{{ session.getLanguage().code }}.gif'>&nbsp;&nbsp;<span class='caret'></span></a>
 					<ul class='dropdown-menu col-xs-1' role='menu'>
-						<li *ngFor='let language of languages' (click)='changeLanguage(language)'><a role='button' aria-expanded='false' class='pull-right'>{{language.name}}&nbsp;&nbsp;<img src='/resources/images/flags/{{ language.code }}.gif'></a></li>
+						<li *ngFor='let language of languages' (click)='changeLanguage(language)'><a role='button' aria-expanded='false' class='pull-left'><img src='/resources/images/flags/{{ language.code }}.gif' />&nbsp;&nbsp;&nbsp;{{ language.name }}</a></li>
 					</ul>
 				</li>
-				<!--<li *ngIf='!isAuthenticated()'><a routerLink='/singup' routerLinkActive='active'><span class='glyphicon glyphicon-user'></span> {{ 'singup' | translate }}</a></li>-->
-				<li *ngIf='!isAuthenticated()'><a routerLink='/singup' routerLinkActive='active'><span class='glyphicon glyphicon-user'></span> singup</a></li>
-				<!--<li *ngIf='!isAuthenticated()'><a routerLink='/login' routerLinkActive='active'><span class='glyphicon glyphicon-log-in'></span> {{ 'login' | translate }}</a></li>-->
-				<li *ngIf='!isAuthenticated()'><a routerLink='/login' routerLinkActive='active'><span class='glyphicon glyphicon-log-in'></span> login</a></li>
-				<li *ngIf='isAuthenticated()'><b><span class='glyphicon glyphicon-user'></span> {{ this.session.getAccount().userId }}</b></li>
-				<!--<li *ngIf='isAuthenticated()'><a ng-click='logout()'><span class='glyphicon glyphicon-log-out'></span> {{ 'logout' | translate }}</a></li>-->
-				<li *ngIf='isAuthenticated()'><a (click)='logout()'><span class='glyphicon glyphicon-log-out'></span> logout</a></li>
+				<li *ngIf='!isAuthenticated()'><a routerLink='/singup' routerLinkActive='active'><span class='glyphicon glyphicon-user'></span> {{ 'nav-bar.singup' | translate }}</a></li>
+				<li *ngIf='!isAuthenticated()'><a routerLink='/login' routerLinkActive='active'><span class='glyphicon glyphicon-log-in'></span> {{ 'nav-bar.login' | translate }}</a></li>
+				<li *ngIf='isAuthenticated()'><b>&nbsp;&nbsp;&nbsp;&nbsp;<span class='glyphicon glyphicon-user'></span>&nbsp;&nbsp;{{ this.session.getAccount().userId }}</b></li>
+				<li *ngIf='isAuthenticated()'><a (click)='logout()'><span class='glyphicon glyphicon-log-out'></span> {{ 'nav-bar.logout' | translate }}</a></li>
 			</ul>
 		</div>
 	</div>

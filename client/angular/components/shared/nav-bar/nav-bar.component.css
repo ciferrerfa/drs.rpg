@@ -107,6 +107,17 @@
 		color: #000000;
 		background-color: #13aff4;
 	}
+	
+	
+   .nav > li.hover > ul , .nav li li.hover ul {
+        clear: left;
+    }
+    .nav > li {
+        clear: left;
+    }
+    .nav ul {
+        clear: left;
+    }
 }
 
 .navbar-toggle {
@@ -130,4 +141,8 @@
 	position: relative;
 	display: block;
 	padding: 0px 0px;
+}
+
+.glyphicon.glyphicon-credit-card {
+    font-size: 10px;
 }

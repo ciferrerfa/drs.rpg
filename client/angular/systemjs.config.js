@@ -5,15 +5,19 @@
 (function(global) {
 	// map tells the System loader where to look for things
 	var map = {
-		'rpg':		'resources/js/angular', // 'dist',
-		'@angular':	'resources/modules/@angular',
-		'rxjs':		'resources/modules/rxjs'
+		'rpg':				'resources/js/angular', // 'dist',
+		'ng2-translate':	'resources/modules/ng2-translate',
+		'@angular':			'resources/modules/@angular',
+		'rxjs':				'resources/modules/rxjs',
+		'services':			'angular/services'
 	};
 	
 	// packages tells the System loader how to load when no filename and/or no extension
 	var packages = {
-		'rpg':	{ main: 'main.js', defaultExtension: 'js' },
-		'rxjs':	{ defaultExtension: 'js' }
+		'rpg':				{ defaultExtension: 'js', main: 'main.js' },
+		'rxjs':				{ defaultExtension: 'js' },
+		'ng2-translate':	{ defaultExtension: 'js', main: 'ng2-translate.js' },
+		'services':			{ defaultExtension: 'js', main: 'index.barrel.js' }
 	};
 	
 	var ngPackageNames = [

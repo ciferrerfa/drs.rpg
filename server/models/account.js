@@ -63,6 +63,14 @@ exports.add = function (userId, password, email, language, role, roles) {
 	});
 };
 
+exports.getAll = function () {
+	return model.find().exec();
+};
+
+exports.getByUserId = function (userId) {
+	return getByUserId(userId);
+};
+
 exports.initialize = function(database) {
 	model = database.model('account', schema);
 	

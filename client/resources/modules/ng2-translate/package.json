@@ -1,0 +1,95 @@
+{
+  "name": "ng2-translate",
+  "description": "An implementation of angular translate for Angular 2",
+  "scripts": {
+    "test": "tsc && karma start",
+    "test-watch": "tsc && karma start --no-single-run --auto-watch",
+    "commit": "npm run prepublish && npm test && git-cz",
+    "prepublish": "tsc && node make.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ocombe/ng2-translate.git"
+  },
+  "keywords": [
+    "angular",
+    "angular2",
+    "translate",
+    "i18n"
+  ],
+  "author": {
+    "name": "Olivier Combe"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ocombe/ng2-translate/issues"
+  },
+  "main": "ng2-translate.js",
+  "typings": "./ng2-translate.d.ts",
+  "homepage": "https://github.com/ocombe/ng2-translate",
+  "peerDependencies": {
+    "@angular/core": "^2.0.0-rc.5",
+    "@angular/http": "^2.0.0-rc.5"
+  },
+  "devDependencies": {
+    "@angular/common": "^2.0.0-rc.5",
+    "@angular/compiler": "^2.0.0-rc.5",
+    "@angular/core": "^2.0.0-rc.5",
+    "@angular/http": "^2.0.0-rc.5",
+    "@angular/platform-browser": "^2.0.0-rc.5",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.5",
+    "@types/es6-shim": "0.0.29",
+    "@types/hammerjs": "^2.0.30",
+    "@types/jasmine": "^2.2.31",
+    "@types/node": "^6.0.33",
+    "commitizen": "~2.5.0",
+    "cz-conventional-changelog": "~1.1.4",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.35.1",
+    "jasmine-core": "~2.4.1",
+    "karma": "~0.13.15",
+    "karma-chrome-launcher": "~0.2.2",
+    "karma-firefox-launcher": "~0.1.7",
+    "karma-jasmine": "~0.3.8",
+    "karma-typescript-preprocessor": "0.0.21",
+    "reflect-metadata": "0.1.3",
+    "rxjs": "5.0.0-beta.6",
+    "semantic-release": "~4.3.5",
+    "systemjs": "~0.19.24",
+    "systemjs-builder": "^0.15.13",
+    "typescript": "2.0.0",
+    "zone.js": "^0.6.10"
+  },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
+  },
+  "version": "2.4.2",
+  "gitHead": "98bb43026f77a60fc525cc8571f16063b506ddc1",
+  "_id": "ng2-translate@2.4.2",
+  "_shasum": "815c15978a7aa41d297f1fe854cb631fd778d1f5",
+  "_from": "ng2-translate@2.4.2",
+  "_npmVersion": "3.10.6",
+  "_nodeVersion": "5.12.0",
+  "_npmUser": {
+    "name": "ocombe",
+    "email": "olivier.combe@gmail.com"
+  },
+  "dist": {
+    "shasum": "815c15978a7aa41d297f1fe854cb631fd778d1f5",
+    "tarball": "https://registry.npmjs.org/ng2-translate/-/ng2-translate-2.4.2.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "ocombe",
+      "email": "olivier.combe@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/ng2-translate-2.4.2.tgz_1471699368873_0.9066598480567336"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ng2-translate/-/ng2-translate-2.4.2.tgz",
+  "readme": "ERROR: No README data found!"
+}

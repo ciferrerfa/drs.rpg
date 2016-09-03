@@ -19,21 +19,22 @@ let AuthenticationService = class AuthenticationService {
     constructor(http) {
         this.http = http;
     }
-    login(userId, password) {
+    login(language, userId, password) {
         var params = JSON.stringify({ userId: userId, password: password });
-        return this.httpPost(http_client_service_1.EndPoint.login, params, this.getHeaders(''));
+        return this.httpPost(http_client_service_1.EndPoint.login, params, this.getHeaders(language, ''));
     }
-    logout(token) {
+    logout(language, token) {
         var params = JSON.stringify({});
-        return this.httpPost(http_client_service_1.EndPoint.logout, params, this.getHeaders(token));
+        return this.httpPost(http_client_service_1.EndPoint.logout, params, this.getHeaders(language, token));
     }
-    singup(userId, password, email) {
+    singup(language, userId, password, email) {
         var params = JSON.stringify({ userId: userId, password: password, email: email });
-        return this.httpPost(http_client_service_1.EndPoint.singup, params, this.getHeaders(''));
+        return this.httpPost(http_client_service_1.EndPoint.singup, params, this.getHeaders(language, ''));
     }
-    getHeaders(token) {
+    getHeaders(language, token) {
         var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/json');
+        headers.append('content-type', 'application/json');
+        headers.append('content-language', (language == undefined) ? 'ca-es' : language.code);
         if (token != '') {
             headers.append('x-security-token', token);
         }

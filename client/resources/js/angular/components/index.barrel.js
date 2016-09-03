@@ -5,5 +5,6 @@ function __export(m) {
 __export(require('../models/index.barrel'));
 __export(require('../routings/index.routing'));
 __export(require('../services/api.service'));
+__export(require('../services/authentication.service'));
 __export(require('../services/session.service'));
 //# sourceMappingURL=index.barrel.js.map

@@ -1,6 +1,8 @@
-import 'rxjs/Rx';
+//import 'rxjs/Rx';
 
 import { Component, OnInit }			from '@angular/core';
+import { Router }						from '@angular/router';
+import { TranslateService }				from 'ng2-translate/ng2-translate';
 
 import { ApiService, SessionService }	from '../index.barrel';
 import { Language }						from '../index.barrel';
@@ -20,11 +22,16 @@ export class NavBarComponent implements OnInit {
 	
 	constructor (
 		private api:		ApiService,
-		private session:	SessionService) { }
+		private session:	SessionService,
+		private translate:	TranslateService,
+		private router:		Router) { }
 	
 	ngOnInit () {
 		
 		this.getLanguages();
+		
+        this.translate.setDefaultLang('ca-es');
+        this.translate.use(this.session.getLanguage().code);
 	}
 	
 	changeLanguage (language) {
@@ -33,6 +40,7 @@ export class NavBarComponent implements OnInit {
 			this.api.setAccountLanguage(this.session.getToken(), language);
 		}
 		this.session.setLanguage(language, true);
+        this.translate.use(this.session.getLanguage().code);
 	}
 	
 	changeRole (role) {
@@ -69,6 +77,7 @@ export class NavBarComponent implements OnInit {
 	logout () {
 		
 		this.session.logout();
+		this.router.navigate(['../home']);
 	}
 	
 	private getLanguages () {
@@ -81,6 +90,13 @@ export class NavBarComponent implements OnInit {
 	private setLanguages (languages: Language[]) {
 		
 		this.languages = languages;
+		var languageKeys = [];
+		
+		languages.forEach(function (item, index) { 
+			languageKeys.push(item.code);
+		});
+		
+        this.translate.addLangs(languageKeys);
 	}
 	
 }

@@ -16,29 +16,42 @@ let ApiService = class ApiService {
     constructor(http) {
         this.http = http;
     }
+    getAccounts(language, token) {
+        return this.http.get(http_client_service_1.EndPoint.account, this.getHeaders(language, '', token))
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
+    getAccount(language, userId, token) {
+        return this.http.get(http_client_service_1.EndPoint.account + '/' + userId, this.getHeaders(language, '', token))
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
     getLanguages(token) {
-        return this.http.get(http_client_service_1.EndPoint.language, this.getHeaders('', token))
+        return this.http.get(http_client_service_1.EndPoint.language, this.getHeaders(undefined, '', token))
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
     setAccountLanguage(token, language) {
-        return this.http.put(http_client_service_1.EndPoint.account + '/language', JSON.stringify({ params: language }), this.getHeaders('application/json', token))
+        return this.http.put(http_client_service_1.EndPoint.account + '/language', JSON.stringify({ params: language }), this.getHeaders(undefined, 'application/json', token))
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
     setAccountRole(token, role) {
-        return this.http.put(http_client_service_1.EndPoint.account + '/role', JSON.stringify({ params: role }), this.getHeaders('application/json', token))
+        return this.http.put(http_client_service_1.EndPoint.account + '/role', JSON.stringify({ params: role }), this.getHeaders(undefined, 'application/json', token))
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
-    getHeaders(contentType, token) {
+    getHeaders(language, contentType, token) {
         var headers = new http_1.Headers();
         if (contentType != '') {
-            headers.append('Content-Type', contentType);
+            headers.append('content-type', contentType);
         }
+        headers.append('content-language', (language == undefined) ? 'ca-es' : language.code);
         if (token != '') {
             headers.append('x-security-token', token);
         }

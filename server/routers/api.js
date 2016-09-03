@@ -11,11 +11,13 @@ var roleController = require(path.join(global.__root + '/server/controllers/role
 var accountController = require(path.join(global.__root + '/server/controllers/account.js'));
 
 router
-    .use(require(path.join(global.__root + '/server/middlewares/log.js')).logRequest)
+    //.use(require(path.join(global.__root + '/server/middlewares/log.js')).logRequest)
     .get('/language', function(req, res) { languageController.getAll(req, res); })
     .get('/language/:code', function(req, res) { languageController.getByCode(req, res); })
     .get('/role', authentication.ensureAuthenticated, function(req, res) { roleController.getAll(req, res); })
     .get('/role/:name', authentication.ensureAuthenticated, function(req, res) { roleController.getByName(req, res); })
+    .get('/account', authentication.ensureAuthenticated, function(req, res) { accountController.getAll(req, res); })
+    .get('/account/:userId', authentication.ensureAuthenticated, function(req, res) { accountController.getByUserId(req, res); })
     .put('/account/language', authentication.ensureAuthenticated, function(req, res) { accountController.setLanguage(req, res); })
     .put('/account/role', authentication.ensureAuthenticated, function(req, res) { accountController.setRole(req, res); });
     //.get('/profile', authentication.ensureAuthenticated, function(req, res) { profileController.getProfile(req, res); })

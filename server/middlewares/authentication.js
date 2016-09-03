@@ -1,32 +1,27 @@
-// file: ./app/middlewares/authentication.js
+// file: ./server/middlewares/request.headers.js
 
-var jwt     = require('jwt-simple');
 var moment  = require('moment');
 
 exports.ensureAuthenticated = function(req, res, next) {
-    
-    // si no hi ha token
-    if (!req.headers['x-security-token']) {
-        return res
-            .status(403)
-            .send();
-    }
-    
-    var token = req.headers['x-security-token'];
-    var payload = jwt.decode(token, require(global.__root + '/server/configs/constants.js').TOKEN_SECRET);
-    
-    // si el token ha expirat
-    if (payload.exp <= moment().unix()) {
+	
+	// si no hi ha token
+	if (global.__securityToken == undefined) {
+		return res
+			.status(403)
+			.send();
+	}
+	
+	// si el token ha expirat
+	if (global.__payload.exp <= moment().unix()) {
         return res
             .status(401)
             .send();
     }
     
-    req.params.userId = payload.sub;
-    //console.log('autenticated ' + payload.sub);
-    
     next();
 };
+
+
 
 /*
 
