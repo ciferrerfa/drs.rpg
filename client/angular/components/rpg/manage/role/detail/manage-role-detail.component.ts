@@ -4,19 +4,19 @@ import { Subscription }					from 'rxjs/Subscription';
 import { TranslateService }				from 'ng2-translate/ng2-translate';
 
 import { ApiService, SessionService }	from '../index.barrel';
-import { Account }						from '../index.barrel';
+import { Role }							from '../index.barrel';
 
 @Component({
-    selector: 'rpg-manage-account-detail',
-	templateUrl: 'angular/components/rpg/manage/account/detail/manage-account-detail.component.tpl.html',
+    selector: 'rpg-manage-role-detail',
+	templateUrl: 'angular/components/rpg/manage/role/detail/manage-role-detail.component.tpl.html',
 	styleUrls: [
-		'angular/components/rpg/manage/account/detail/manage-account-detail.component.css'
+		'angular/components/rpg/manage/role/detail/manage-role-detail.component.css'
 	]
 })
 
-export class ManageAccountDetailComponent implements OnInit { 
+export class ManageRoleDetailComponent implements OnInit { 
 	
-	private account:		Account;
+	private role:			Role;
 	private subscription:	Subscription;
 	
 	constructor(
@@ -28,9 +28,9 @@ export class ManageAccountDetailComponent implements OnInit {
 	
 	ngOnInit () {
 		this.subscription = this.route.params.subscribe(params => {
-			let userId = params['userId']; 
+			let name = params['name']; 
 			// let id = +params['id']; (+) converts string 'id' to a number
-			this.getAccount(userId);
+			this.getRole(name);
 		});
 	}
 	
@@ -44,16 +44,16 @@ export class ManageAccountDetailComponent implements OnInit {
 		console.log('An error occurred: ' + error);
 	}
 	
-	private getAccount (userId: string) {
+	private getRole (name: string) {
 		
-		this.api.getAccount(this.session.getLanguage(), userId, this.session.getToken())
-			.then(account => this.setAccount(account))
+		this.api.getRole(this.session.getLanguage(), name, this.session.getToken())
+			.then(role => this.setRole(role))
 			.catch(this.handleError);
 	}
 	
-	private setAccount (account: Account) {
+	private setRole (role: Role) {
 		
-		this.account = account;
+		this.role = role;
 	}
 	
 }

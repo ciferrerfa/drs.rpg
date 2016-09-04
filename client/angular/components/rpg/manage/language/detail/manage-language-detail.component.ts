@@ -4,19 +4,19 @@ import { Subscription }					from 'rxjs/Subscription';
 import { TranslateService }				from 'ng2-translate/ng2-translate';
 
 import { ApiService, SessionService }	from '../index.barrel';
-import { Account }						from '../index.barrel';
+import { Language }						from '../index.barrel';
 
 @Component({
-    selector: 'rpg-manage-account-detail',
-	templateUrl: 'angular/components/rpg/manage/account/detail/manage-account-detail.component.tpl.html',
+    selector: 'rpg-manage-language-detail',
+	templateUrl: 'angular/components/rpg/manage/language/detail/manage-language-detail.component.tpl.html',
 	styleUrls: [
-		'angular/components/rpg/manage/account/detail/manage-account-detail.component.css'
+		'angular/components/rpg/manage/language/detail/manage-language-detail.component.css'
 	]
 })
 
-export class ManageAccountDetailComponent implements OnInit { 
+export class ManageLanguageDetailComponent implements OnInit { 
 	
-	private account:		Account;
+	private language:		Language;
 	private subscription:	Subscription;
 	
 	constructor(
@@ -28,9 +28,9 @@ export class ManageAccountDetailComponent implements OnInit {
 	
 	ngOnInit () {
 		this.subscription = this.route.params.subscribe(params => {
-			let userId = params['userId']; 
+			let code = params['code']; 
 			// let id = +params['id']; (+) converts string 'id' to a number
-			this.getAccount(userId);
+			this.getLanguage(code);
 		});
 	}
 	
@@ -44,16 +44,16 @@ export class ManageAccountDetailComponent implements OnInit {
 		console.log('An error occurred: ' + error);
 	}
 	
-	private getAccount (userId: string) {
+	private getLanguage (code: string) {
 		
-		this.api.getAccount(this.session.getLanguage(), userId, this.session.getToken())
-			.then(account => this.setAccount(account))
+		this.api.getLanguage(this.session.getLanguage(), code, this.session.getToken())
+			.then(language => this.setLanguage(language))
 			.catch(this.handleError);
 	}
 	
-	private setAccount (account: Account) {
+	private setLanguage (language: Language) {
 		
-		this.account = account;
+		this.language = language;
 	}
 	
 }

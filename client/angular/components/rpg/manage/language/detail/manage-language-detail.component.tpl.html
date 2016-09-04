@@ -1,0 +1,15 @@
+Manage - Language - Detail
+
+<h2>Language</h2>
+  <div *ngIf="language">
+    <h3>"{{language.name}}"</h3>
+    <div>
+      <label>Id: </label>{{language._id}}</div>
+    <div>
+      <label>code: </label>
+      <input [(ngModel)]="language.code" placeholder="code"/>
+    </div>
+    <p>
+      <button (click)="gotoManage()">Back</button>
+    </p>
+  </div>

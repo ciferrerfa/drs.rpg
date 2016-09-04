@@ -3,3 +3,4 @@
 - mobile
 -   on select language menu are colsed (OK) 
 -   on select role menu are not closed (KO)
+-   https://github.com/angular/angular/issues/11208

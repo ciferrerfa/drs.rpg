@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
+const router_2 = require('@angular/router');
 const ng2_translate_1 = require('ng2-translate/ng2-translate');
 const session_service_1 = require('../../../../services/session.service');
 let ManageHomeComponent = class ManageHomeComponent {
@@ -21,13 +22,14 @@ let ManageHomeComponent = class ManageHomeComponent {
 };
 ManageHomeComponent = __decorate([
     core_1.Component({
+        directives: [router_1.ROUTER_DIRECTIVES],
         selector: 'rpg-manage-home',
         templateUrl: 'angular/components/rpg/manage/home/manage-home.component.tpl.html',
         styleUrls: [
             'angular/components/rpg/manage/home/manage-home.component.css'
         ]
     }), 
-    __metadata('design:paramtypes', [session_service_1.SessionService, ng2_translate_1.TranslateService, router_1.Router])
+    __metadata('design:paramtypes', [session_service_1.SessionService, ng2_translate_1.TranslateService, router_2.Router])
 ], ManageHomeComponent);
 exports.ManageHomeComponent = ManageHomeComponent;
 //# sourceMappingURL=manage-home.component.js.map

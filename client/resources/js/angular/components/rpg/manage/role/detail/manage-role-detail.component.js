@@ -12,7 +12,7 @@ const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
 const ng2_translate_1 = require('ng2-translate/ng2-translate');
 const index_barrel_1 = require('../index.barrel');
-let ManageAccountDetailComponent = class ManageAccountDetailComponent {
+let ManageRoleDetailComponent = class ManageRoleDetailComponent {
     constructor(api, session, translate, router, route) {
         this.api = api;
         this.session = session;
@@ -22,8 +22,8 @@ let ManageAccountDetailComponent = class ManageAccountDetailComponent {
     }
     ngOnInit() {
         this.subscription = this.route.params.subscribe(params => {
-            let userId = params['userId'];
-            this.getAccount(userId);
+            let name = params['name'];
+            this.getRole(name);
         });
     }
     ngOnDestroy() {
@@ -33,24 +33,24 @@ let ManageAccountDetailComponent = class ManageAccountDetailComponent {
     handleError(error) {
         console.log('An error occurred: ' + error);
     }
-    getAccount(userId) {
-        this.api.getAccount(this.session.getLanguage(), userId, this.session.getToken())
-            .then(account => this.setAccount(account))
+    getRole(name) {
+        this.api.getRole(this.session.getLanguage(), name, this.session.getToken())
+            .then(role => this.setRole(role))
             .catch(this.handleError);
     }
-    setAccount(account) {
-        this.account = account;
+    setRole(role) {
+        this.role = role;
     }
 };
-ManageAccountDetailComponent = __decorate([
+ManageRoleDetailComponent = __decorate([
     core_1.Component({
-        selector: 'rpg-manage-account-detail',
-        templateUrl: 'angular/components/rpg/manage/account/detail/manage-account-detail.component.tpl.html',
+        selector: 'rpg-manage-role-detail',
+        templateUrl: 'angular/components/rpg/manage/role/detail/manage-role-detail.component.tpl.html',
         styleUrls: [
-            'angular/components/rpg/manage/account/detail/manage-account-detail.component.css'
+            'angular/components/rpg/manage/role/detail/manage-role-detail.component.css'
         ]
     }), 
     __metadata('design:paramtypes', [index_barrel_1.ApiService, index_barrel_1.SessionService, ng2_translate_1.TranslateService, router_1.Router, router_1.ActivatedRoute])
-], ManageAccountDetailComponent);
-exports.ManageAccountDetailComponent = ManageAccountDetailComponent;
-//# sourceMappingURL=manage-account-detail.component.js.map
+], ManageRoleDetailComponent);
+exports.ManageRoleDetailComponent = ManageRoleDetailComponent;
+//# sourceMappingURL=manage-role-detail.component.js.map

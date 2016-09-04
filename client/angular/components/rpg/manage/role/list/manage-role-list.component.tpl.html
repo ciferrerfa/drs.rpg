@@ -1,0 +1,9 @@
+Manage - Role - List
+
+  <h2>Roles</h2>
+  <ul class="items">
+    <li *ngFor="let role of roles"
+      (click)="onSelect(role)">
+      <span class="badge">{{ role.name }}</span> {{ role.name }}
+    </li>
+  </ul>

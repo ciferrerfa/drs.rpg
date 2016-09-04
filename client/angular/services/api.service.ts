@@ -39,6 +39,14 @@ export class ApiService {
 			.catch(this.handleError);
 	}
 	
+	getLanguage(language: Language, code: string, token: string): Promise<Language> {
+		
+		return this.http.get(EndPoint.language + '/' + code, this.getHeaders(language, '', token))
+			.toPromise()
+			.then(response => response.json().data as Language)
+			.catch(this.handleError); 
+	}
+	
 	setAccountLanguage(token: string, language: Language): Promise<Language> {
 		return this.http.put(EndPoint.account + '/language', JSON.stringify({ params: language }), this.getHeaders(undefined, 'application/json', token))
 			.toPromise()
@@ -64,6 +72,22 @@ export class ApiService {
 		if (token != '') { headers.append('x-security-token', token); }
 		
 		return new RequestOptions({ headers: headers });
+	}
+	
+	getRoles(language: Language, token: string): Promise<Role[]> {
+		
+		return this.http.get(EndPoint.role, this.getHeaders(language, '', token))
+			.toPromise()
+			.then(response => response.json().data as Role[])
+			.catch(this.handleError);
+	}
+	
+	getRole(language: Language, name: string, token: string): Promise<Role> {
+		
+		return this.http.get(EndPoint.role + '/' + name, this.getHeaders(language, '', token))
+			.toPromise()
+			.then(response => response.json().data as Role)
+			.catch(this.handleError);
 	}
 	
 	private handleError(error: any): Promise<any> {

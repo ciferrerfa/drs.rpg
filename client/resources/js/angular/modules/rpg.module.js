@@ -26,8 +26,12 @@ const home_component_1 = require('../components/rpg/home/home.component');
 const login_component_1 = require('../components/rpg/login/login.component');
 const singup_component_1 = require('../components/rpg/singup/singup.component');
 const manage_home_component_1 = require('../components/rpg/manage/home/manage-home.component');
-const manage_account_detail_component_1 = require('../components/rpg/manage/account/detail/manage-account-detail.component');
 const manage_account_list_component_1 = require('../components/rpg/manage/account/list/manage-account-list.component');
+const manage_account_detail_component_1 = require('../components/rpg/manage/account/detail/manage-account-detail.component');
+const manage_language_list_component_1 = require('../components/rpg/manage/language/list/manage-language-list.component');
+const manage_language_detail_component_1 = require('../components/rpg/manage/language/detail/manage-language-detail.component');
+const manage_role_list_component_1 = require('../components/rpg/manage/role/list/manage-role-list.component');
+const manage_role_detail_component_1 = require('../components/rpg/manage/role/detail/manage-role-detail.component');
 let RpgModule = class RpgModule {
 };
 RpgModule = __decorate([
@@ -48,8 +52,10 @@ RpgModule = __decorate([
             index_component_1.IndexComponent, nav_bar_component_1.NavBarComponent,
             sticky_footer_component_1.StickyFooterComponent, home_component_1.HomeComponent,
             login_component_1.LoginComponent, singup_component_1.SingupComponent,
-            manage_home_component_1.ManageHomeComponent, manage_account_detail_component_1.ManageAccountDetailComponent,
-            manage_account_list_component_1.ManageAccountListComponent
+            manage_home_component_1.ManageHomeComponent,
+            manage_account_list_component_1.ManageAccountListComponent, manage_account_detail_component_1.ManageAccountDetailComponent,
+            manage_language_list_component_1.ManageLanguageListComponent, manage_language_detail_component_1.ManageLanguageDetailComponent,
+            manage_role_list_component_1.ManageRoleListComponent, manage_role_detail_component_1.ManageRoleDetailComponent
         ],
         providers: [
             common_1.FormBuilder, api_service_1.ApiService, authentication_service_1.AuthenticationService,

@@ -20,8 +20,12 @@ import { HomeComponent }						from '../components/rpg/home/home.component';
 import { LoginComponent }						from '../components/rpg/login/login.component';
 import { SingupComponent }						from '../components/rpg/singup/singup.component';
 import { ManageHomeComponent }					from '../components/rpg/manage/home/manage-home.component';
-import { ManageAccountDetailComponent }			from '../components/rpg/manage/account/detail/manage-account-detail.component';
 import { ManageAccountListComponent }			from '../components/rpg/manage/account/list/manage-account-list.component';
+import { ManageAccountDetailComponent }			from '../components/rpg/manage/account/detail/manage-account-detail.component';
+import { ManageLanguageListComponent }			from '../components/rpg/manage/language/list/manage-language-list.component';
+import { ManageLanguageDetailComponent }		from '../components/rpg/manage/language/detail/manage-language-detail.component';
+import { ManageRoleListComponent }				from '../components/rpg/manage/role/list/manage-role-list.component';
+import { ManageRoleDetailComponent }			from '../components/rpg/manage/role/detail/manage-role-detail.component';
 
 @NgModule({ 
 	imports: [
@@ -43,8 +47,10 @@ import { ManageAccountListComponent }			from '../components/rpg/manage/account/l
 		IndexComponent,					NavBarComponent,	
 		StickyFooterComponent,			HomeComponent,
 		LoginComponent,					SingupComponent,
-		ManageHomeComponent,			ManageAccountDetailComponent,
-		ManageAccountListComponent
+		ManageHomeComponent,
+		ManageAccountListComponent,		ManageAccountDetailComponent,
+		ManageLanguageListComponent,	ManageLanguageDetailComponent,
+		ManageRoleListComponent,		ManageRoleDetailComponent
 	],
 	providers: [
 		FormBuilder,	ApiService,				AuthenticationService,	

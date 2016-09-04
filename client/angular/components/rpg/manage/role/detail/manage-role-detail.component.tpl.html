@@ -1,0 +1,15 @@
+Manage - Role - Detail
+
+<h2>Role</h2>
+  <div *ngIf="role">
+    <h3>"{{role.name}}"</h3>
+    <div>
+      <label>Id: </label>{{role._id}}</div>
+    <div>
+      <label>name: </label>
+      <input [(ngModel)]="role.name" placeholder="name"/>
+    </div>
+    <p>
+      <button (click)="gotoManage()">Back</button>
+    </p>
+  </div>

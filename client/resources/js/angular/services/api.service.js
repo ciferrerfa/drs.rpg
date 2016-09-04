@@ -34,6 +34,12 @@ let ApiService = class ApiService {
             .then(response => response.json().data)
             .catch(this.handleError);
     }
+    getLanguage(language, code, token) {
+        return this.http.get(http_client_service_1.EndPoint.language + '/' + code, this.getHeaders(language, '', token))
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
     setAccountLanguage(token, language) {
         return this.http.put(http_client_service_1.EndPoint.account + '/language', JSON.stringify({ params: language }), this.getHeaders(undefined, 'application/json', token))
             .toPromise()
@@ -56,6 +62,18 @@ let ApiService = class ApiService {
             headers.append('x-security-token', token);
         }
         return new http_1.RequestOptions({ headers: headers });
+    }
+    getRoles(language, token) {
+        return this.http.get(http_client_service_1.EndPoint.role, this.getHeaders(language, '', token))
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
+    getRole(language, name, token) {
+        return this.http.get(http_client_service_1.EndPoint.role + '/' + name, this.getHeaders(language, '', token))
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
     }
     handleError(error) {
         console.log('An error occurred: ' + error);

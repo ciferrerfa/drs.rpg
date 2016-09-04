@@ -1,0 +1,9 @@
+Manage - Language - List
+
+  <h2>Languages</h2>
+  <ul class="items">
+    <li *ngFor="let language of languages"
+      (click)="onSelect(language)">
+      <span class="badge">{{ language.code }}</span> {{ language.name }}
+    </li>
+  </ul>
