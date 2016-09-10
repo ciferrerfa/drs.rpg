@@ -1,4 +1,4 @@
-// file: ./server/routers/authentication.js
+// file: ./server/routers/api/authentication.js
 
 var express = require('express');
 var path    = require('path');

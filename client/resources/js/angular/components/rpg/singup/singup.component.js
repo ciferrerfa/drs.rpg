@@ -35,7 +35,7 @@ let SingupComponent = class SingupComponent {
     }
     resolveSingup(data) {
         if (this.session.isAuthenticated()) {
-            this.router.navigate(['../profile']);
+            this.router.navigate(['../home']);
         }
         else {
             this.translate.get(data.data).subscribe((res) => {

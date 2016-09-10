@@ -3,9 +3,9 @@
 
 export class EndPoint {
 	//auth
-	public static get login():	string { return '/authentication/login'; }
-	public static get logout():	string { return '/authentication/logout'; }
-	public static get singup():	string { return '/authentication/singup'; }
+	public static get login():	string { return '/api/authentication/login'; }
+	public static get logout():	string { return '/api/authentication/logout'; }
+	public static get singup():	string { return '/api/authentication/singup'; }
 	
 	//api
 	public static get language():	string { return '/api/language'; }

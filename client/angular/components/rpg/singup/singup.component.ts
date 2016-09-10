@@ -44,7 +44,7 @@ export class SingupComponent implements OnInit {
 	
 	private resolveSingup(data: Auth) {
 		if (this.session.isAuthenticated()) {
-			this.router.navigate(['../profile']);
+			this.router.navigate(['../home']);
 		}
 		else {
 			this.translate.get(data.data).subscribe((res: string) => {

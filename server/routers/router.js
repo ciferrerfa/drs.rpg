@@ -12,7 +12,9 @@ module.exports = function(app) {
     app.use('/home', require(path.join(global.__root + '/server/routers/index.js')).router);
     app.use('/index.html', require(path.join(global.__root + '/server/routers/index.js')).router);
     
-    app.use('/authentication', require(path.join(global.__root + '/server/routers/authentication.js')).router);
-    app.use('/api', require(path.join(global.__root + '/server/routers/api.js')).router);
+    app.use('/api/account', require(path.join(global.__root + '/server/routers/api/account.js')).router);
+    app.use('/api/authentication', require(path.join(global.__root + '/server/routers/api/authentication.js')).router);
+    app.use('/api/language', require(path.join(global.__root + '/server/routers/api/language.js')).router);
+    app.use('/api/role', require(path.join(global.__root + '/server/routers/api/role.js')).router);
     
 };

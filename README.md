@@ -5,3 +5,5 @@ drs roleplay
 https://github.com/ocombe/ng2-translate
 
 https://auth0.com/blog/angular-2-series-part-4-component-router-in-depth/
+
+https://coryrylan.com/blog/introduction-to-angular-2-routing
